@@ -1,0 +1,226 @@
+/* === 注射と針の互換性検索 — スタイル === */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --accent: #0077B6;
+  --accent-light: #00A8E8;
+  --bg: #FFFFFF;
+  --card-bg: #F8FAFE;
+  --card-border: #E2E8F0;
+  --text: #1A202C;
+  --text-muted: #718096;
+  --error: #E53E3E;
+  --radius: 8px;
+}
+
+body {
+  font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Meiryo", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* === Header === */
+
+header {
+  background: var(--accent);
+  color: #fff;
+  text-align: center;
+  padding: 20px 16px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* === Container === */
+
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+/* === Tabs === */
+
+.tabs {
+  display: flex;
+  border-bottom: 2px solid var(--card-border);
+  margin-bottom: 20px;
+}
+
+.tab {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 12px 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.tab:hover {
+  color: var(--accent);
+}
+
+.tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* === Search === */
+
+.search-container {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius);
+  outline: none;
+  transition: border-color 0.2s;
+  font-family: inherit;
+}
+
+.search-input:focus {
+  border-color: var(--accent);
+}
+
+/* === Autocomplete === */
+
+.autocomplete-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid var(--card-border);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  display: none;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.autocomplete-list.visible {
+  display: block;
+}
+
+.autocomplete-item {
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.15s;
+}
+
+.autocomplete-item:last-child {
+  border-bottom: none;
+}
+
+.autocomplete-item:hover,
+.autocomplete-item.highlighted {
+  background: #EBF8FF;
+}
+
+.autocomplete-item .maker {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.autocomplete-item .model {
+  font-weight: 600;
+}
+
+/* === Status Message === */
+
+.status-message {
+  text-align: center;
+  padding: 16px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.status-message.error {
+  color: var(--error);
+}
+
+/* === Result Cards === */
+
+.results {
+  display: grid;
+  gap: 12px;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s;
+}
+
+.card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.card .card-maker {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.card .card-model {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.card .card-notes {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  padding-top: 8px;
+  border-top: 1px solid var(--card-border);
+}
+
+/* === Responsive === */
+
+@media (max-width: 480px) {
+  header {
+    font-size: 1.15rem;
+    padding: 16px 12px;
+  }
+
+  .container {
+    padding: 16px 12px;
+  }
+
+  .tab {
+    font-size: 0.85rem;
+    padding: 10px 4px;
+  }
+
+  .search-input {
+    font-size: 0.95rem;
+    padding: 10px 12px;
+  }
+}

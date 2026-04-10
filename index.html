@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>注射と針の互換性検索</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js" defer></script>
+</head>
+<body>
+  <header>注射と針の互換性検索</header>
+
+  <div class="container">
+    <div class="tabs">
+      <button class="tab active">注射器から針を探す</button>
+      <button class="tab">針から注射器を探す</button>
+    </div>
+
+    <div class="search-container">
+      <input
+        type="text"
+        id="search-input"
+        class="search-input"
+        placeholder="注射器の製品名やメーカー名を入力..."
+        autocomplete="off"
+      >
+      <div id="autocomplete-list" class="autocomplete-list"></div>
+    </div>
+
+    <div id="status-message" class="status-message"></div>
+    <div id="results" class="results"></div>
+  </div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
