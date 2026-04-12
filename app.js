@@ -36,12 +36,23 @@
       const sKey = row.syringe_maker + "\0" + row.syringe_model;
       if (!syringeSet.has(sKey)) {
         syringeSet.add(sKey);
-        syringes.push({ maker: row.syringe_maker, model: row.syringe_model });
+        syringes.push({
+          maker: row.syringe_maker,
+          model: row.syringe_model,
+          volume: row.syringe_volume_ml || "",
+          tipType: row.syringe_tip_type || ""
+        });
       }
       const nKey = row.needle_maker + "\0" + row.needle_model;
       if (!needleSet.has(nKey)) {
         needleSet.add(nKey);
-        needles.push({ maker: row.needle_maker, model: row.needle_model });
+        needles.push({
+          maker: row.needle_maker,
+          model: row.needle_model,
+          gauge: row.needle_gauge || "",
+          length: row.needle_length || "",
+          connection: row.needle_connection || ""
+        });
       }
     });
 
@@ -118,9 +129,24 @@
     candidates.forEach(function (item, idx) {
       var div = document.createElement("div");
       div.className = "autocomplete-item";
+
+      var detailParts = [];
+      if (currentTab === "syringe") {
+        if (item.volume) detailParts.push(item.volume + "mL");
+        if (item.tipType) detailParts.push(item.tipType);
+      } else {
+        if (item.gauge) detailParts.push(item.gauge);
+        if (item.length) detailParts.push(item.length);
+        if (item.connection) detailParts.push(item.connection);
+      }
+      var detailHTML = detailParts.length > 0
+        ? ' <span class="ac-detail">' + escapeHTML(detailParts.join(" / ")) + "</span>"
+        : "";
+
       div.innerHTML =
         '<span class="maker">' + escapeHTML(item.maker) + "</span> " +
-        '<span class="model">' + escapeHTML(item.model) + "</span>";
+        '<span class="model">' + escapeHTML(item.model) + "</span>" +
+        detailHTML;
       div.addEventListener("mousedown", function (e) {
         e.preventDefault();
         selectCandidate(item);
@@ -176,15 +202,22 @@
     statusMessage.className = "status-message";
 
     results.forEach(function (row) {
-      var maker, model, notes;
+      var maker, model, notes, specs, compatibility;
+      var specParts = [];
       if (currentTab === "syringe") {
         maker = row.needle_maker;
         model = row.needle_model;
+        if (row.needle_gauge) specParts.push(row.needle_gauge);
+        if (row.needle_length) specParts.push(row.needle_length);
       } else {
         maker = row.syringe_maker;
         model = row.syringe_model;
+        if (row.syringe_volume_ml) specParts.push(row.syringe_volume_ml + "mL");
+        if (row.syringe_tip_type) specParts.push(row.syringe_tip_type);
       }
+      specs = specParts.join(" / ");
       notes = row.notes;
+      compatibility = row.compatibility || "";
 
       var card = document.createElement("div");
       card.className = "card";
@@ -192,6 +225,15 @@
       var html =
         '<div class="card-maker">' + escapeHTML(maker) + "</div>" +
         '<div class="card-model">' + escapeHTML(model) + "</div>";
+
+      if (specs) {
+        html += '<div class="card-specs">' + escapeHTML(specs) + "</div>";
+      }
+
+      if (compatibility) {
+        var badgeClass = compatibility === "確認済" ? "badge-confirmed" : "badge-standard";
+        html += '<span class="card-badge ' + badgeClass + '">' + escapeHTML(compatibility) + "</span>";
+      }
 
       if (notes && notes.trim() !== "") {
         html += '<div class="card-notes">' + escapeHTML(notes) + "</div>";

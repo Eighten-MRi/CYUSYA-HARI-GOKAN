@@ -149,6 +149,12 @@ header {
   font-weight: 600;
 }
 
+.autocomplete-item .ac-detail {
+  font-size: 0.75rem;
+  color: var(--accent);
+  margin-left: 6px;
+}
+
 /* === Status Message === */
 
 .status-message {
@@ -192,6 +198,31 @@ header {
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--text);
+}
+
+.card .card-specs {
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.card .card-badge {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.card .badge-confirmed {
+  background: #C6F6D5;
+  color: #276749;
+}
+
+.card .badge-standard {
+  background: #BEE3F8;
+  color: #2A4365;
 }
 
 .card .card-notes {
