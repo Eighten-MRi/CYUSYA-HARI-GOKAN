@@ -15,7 +15,10 @@
   var penDeviceList = [];  // unique pen devices (from penData)
   var penNeedleList = [];  // unique pen needles (from penData)
 
-  var currentTab = "syringe";
+  var allDeviceList = [];  // 統合デバイスリスト（注射器+ペン型+プレフィルド）
+  var allNeedleList = [];  // 統合針リスト（注射器針+ペン針）
+
+  var currentTab = "device";
   var highlightIndex = -1;
   var currentCandidates = [];
 
@@ -57,6 +60,39 @@
     needleList = buildUniqueNeedles(syringeData);
     penDeviceList = buildUniqueDevices(penData);
     penNeedleList = buildUniqueNeedles(penData);
+
+    // 統合リスト構築
+    allDeviceList = [];
+    syringeList.forEach(function (item) {
+      allDeviceList.push(Object.assign({}, item, { category: "注射器" }));
+    });
+    penDeviceList.forEach(function (item) {
+      allDeviceList.push(Object.assign({}, item, { category: "ペン型" }));
+    });
+    buildUniquePrefilledDevices(prefilledData).forEach(function (item) {
+      allDeviceList.push(Object.assign({}, item, { category: "プレフィルド", connection: "一体型" }));
+    });
+
+    var seen = new Set();
+    allNeedleList = [];
+    needleList.forEach(function (item) {
+      var key = item.maker + "\0" + item.model;
+      if (!seen.has(key)) { seen.add(key); allNeedleList.push(Object.assign({}, item, { category: "注射器" })); }
+    });
+    penNeedleList.forEach(function (item) {
+      var key = item.maker + "\0" + item.model;
+      if (!seen.has(key)) { seen.add(key); allNeedleList.push(Object.assign({}, item, { category: "ペン型" })); }
+    });
+  }
+
+  // カテゴリ→CSSクラス変換
+  function getCategoryClass(category) {
+    switch (category) {
+      case "注射器": return "syringe";
+      case "ペン型": return "pen";
+      case "プレフィルド": return "prefilled";
+      default: return "default";
+    }
   }
 
   function buildUniqueDevices(rows) {
@@ -159,10 +195,8 @@
   // --- 現在のタブに応じた検索対象リスト ---
   function getActiveList() {
     switch (currentTab) {
-      case "syringe": return syringeList;
-      case "needle": return needleList;
-      case "pen_device": return penDeviceList;
-      case "pen_needle": return penNeedleList;
+      case "device": return allDeviceList;
+      case "needle_all": return allNeedleList;
       default: return [];
     }
   }
@@ -247,20 +281,41 @@
 
   // --- オートコンプリート候補取得 ---
   function getCandidates(query) {
-    if (currentTab === "prefilled" || currentTab === "drug") return [];
+    if (currentTab === "drug") return [];
     var list = getActiveList();
     var normalizedQuery = toKatakana(query).toLowerCase();
 
     if (normalizedQuery === "") return [];
 
     var matches = [];
-    for (var i = 0; i < list.length && matches.length < 10; i++) {
+    for (var i = 0; i < list.length && matches.length < 8; i++) {
       var item = list[i];
       var text = toKatakana(item.maker + " " + item.model).toLowerCase();
       if (text.indexOf(normalizedQuery) !== -1) {
         matches.push(item);
       }
     }
+
+    // deviceタブのみ：薬剤名でも検索し、デバイス名へ橋渡し
+    if (currentTab === "device") {
+      for (var j = 0; j < drugsData.length && matches.length < 10; j++) {
+        var drug = drugsData[j];
+        var drugText = toKatakana(
+          (drug.brand_name || "") + " " + (drug.generic_name || "") + " " + (drug.maker || "")
+        ).toLowerCase();
+        if (drugText.indexOf(normalizedQuery) !== -1 && drug.device_name && drug.device_name.trim() !== "") {
+          matches.push({
+            maker: drug.maker || "",
+            model: drug.brand_name || "",
+            deviceName: drug.device_name || "",
+            categoryId: drug.category_id || "",
+            deviceType: drug.device_type || "",
+            isDrug: true
+          });
+        }
+      }
+    }
+
     return matches;
   }
 
@@ -275,27 +330,43 @@
       return;
     }
 
-    candidates.forEach(function (item, idx) {
+    candidates.forEach(function (item) {
       var div = document.createElement("div");
       div.className = "autocomplete-item";
 
       var detailParts = [];
-      if (currentTab === "syringe" || currentTab === "pen_device") {
-        if (item.spec) detailParts.push(item.spec);
-        if (item.connection) detailParts.push(item.connection);
+      var detailHTML = "";
+      var categoryHTML = "";
+      var bridgeHTML = "";
+
+      if (item.isDrug) {
+        // 薬剤→デバイス橋渡し候補
+        bridgeHTML = ' <span class="ac-bridge">→ ' + escapeHTML(item.deviceName) + "</span>";
+        var typeClass = (item.deviceType || "").indexOf("ペン") !== -1 ? "pen" : "prefilled";
+        categoryHTML = ' <span class="ac-category ac-category-' + typeClass + '">' + escapeHTML(item.deviceType || "薬剤") + "</span>";
       } else {
-        if (item.gauge) detailParts.push(item.gauge);
-        if (item.length) detailParts.push(item.length);
-        if (item.connection) detailParts.push(item.connection);
+        // 通常デバイス/針候補
+        if (currentTab === "device") {
+          if (item.spec) detailParts.push(item.spec);
+          if (item.connection) detailParts.push(item.connection);
+        } else {
+          if (item.gauge) detailParts.push(item.gauge);
+          if (item.length) detailParts.push(item.length);
+          if (item.connection) detailParts.push(item.connection);
+        }
+        if (detailParts.length > 0) {
+          detailHTML = ' <span class="ac-detail">' + escapeHTML(detailParts.join(" / ")) + "</span>";
+        }
+        if (item.category) {
+          categoryHTML = ' <span class="ac-category ac-category-' + getCategoryClass(item.category) + '">' + escapeHTML(item.category) + "</span>";
+        }
       }
-      var detailHTML = detailParts.length > 0
-        ? ' <span class="ac-detail">' + escapeHTML(detailParts.join(" / ")) + "</span>"
-        : "";
 
       div.innerHTML =
         '<span class="maker">' + escapeHTML(item.maker) + "</span> " +
         '<span class="model">' + escapeHTML(item.model) + "</span>" +
-        detailHTML;
+        detailHTML + bridgeHTML + categoryHTML;
+
       div.addEventListener("mousedown", function (e) {
         e.preventDefault();
         selectCandidate(item);
@@ -323,67 +394,164 @@
   function performSearch(selected) {
     resultsContainer.innerHTML = "";
 
-    var dataSource, results;
+    if (currentTab === "device") {
+      // 通常デバイス：プレフィルド（一体型）の場合
+      if (!selected.isDrug && selected.category === "プレフィルド") {
+        showPrefilledResult(selected);
+        return;
+      }
 
-    if (currentTab === "syringe" || currentTab === "needle") {
-      dataSource = syringeData;
-    } else if (currentTab === "pen_device" || currentTab === "pen_needle") {
-      dataSource = penData;
-    } else {
-      return;
-    }
+      var results;
 
-    if (currentTab === "syringe" || currentTab === "pen_device") {
-      results = dataSource.filter(function (row) {
-        return row.device_maker === selected.maker && row.device_model === selected.model;
-      });
-    } else {
-      results = dataSource.filter(function (row) {
-        return row.needle_maker === selected.maker && row.needle_model === selected.model;
-      });
-    }
+      if (selected.isDrug) {
+        // 薬剤名からデバイス→針を検索
+        var devName = selected.deviceName;
 
-    if (results.length === 0) {
-      statusMessage.textContent = "該当する製品が見つかりませんでした";
+        if (!devName || devName.trim() === "") {
+          // デバイス名なし（バイアル等）
+          statusMessage.textContent = "バイアル製剤です。通常の注射器と針を組み合わせて使用してください";
+          statusMessage.className = "status-message";
+          return;
+        }
+
+        // ペン型データから検索
+        results = penData.filter(function (row) {
+          return row.device_model === devName;
+        });
+        // ペン型に見つからなければ注射器データも検索
+        if (results.length === 0) {
+          results = syringeData.filter(function (row) {
+            return row.device_model === devName;
+          });
+        }
+        // それでも見つからなければプレフィルドデータを確認（一体型）
+        if (results.length === 0) {
+          var isIntegrated = prefilledData.some(function (row) {
+            return row.device_model === devName;
+          });
+          if (isIntegrated) {
+            showPrefilledResult(selected);
+            return;
+          }
+        }
+      } else {
+        var dataSource = selected.category === "注射器" ? syringeData : penData;
+        results = dataSource.filter(function (row) {
+          return row.device_maker === selected.maker && row.device_model === selected.model;
+        });
+      }
+
+      if (results.length === 0) {
+        statusMessage.textContent = "該当する針が見つかりませんでした";
+        statusMessage.className = "status-message";
+        return;
+      }
+
+      var label = selected.isDrug
+        ? selected.model + "（" + selected.deviceName + "）"
+        : selected.maker + " " + selected.model;
+      statusMessage.textContent = label + " に対応する針: " + results.length + " 件";
       statusMessage.className = "status-message";
-      return;
-    }
 
-    statusMessage.textContent = results.length + " 件の互換製品が見つかりました";
+      results.forEach(function (row) {
+        var card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = buildUnifiedCardHTML(row, "needle_result");
+        resultsContainer.appendChild(card);
+      });
+
+    } else if (currentTab === "needle_all") {
+      // 針からデバイスを検索（注射器・ペン型横断）
+      var results = [];
+      syringeData.forEach(function (row) {
+        if (row.needle_maker === selected.maker && row.needle_model === selected.model) {
+          results.push({ row: row, category: "注射器" });
+        }
+      });
+      penData.forEach(function (row) {
+        if (row.needle_maker === selected.maker && row.needle_model === selected.model) {
+          results.push({ row: row, category: "ペン型" });
+        }
+      });
+
+      if (results.length === 0) {
+        statusMessage.textContent = "該当する注射デバイスが見つかりませんでした";
+        statusMessage.className = "status-message";
+        return;
+      }
+
+      statusMessage.textContent = selected.maker + " " + selected.model + " に対応するデバイス: " + results.length + " 件";
+      statusMessage.className = "status-message";
+
+      results.forEach(function (item) {
+        var card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = buildUnifiedCardHTML(item.row, "device_result", item.category);
+        resultsContainer.appendChild(card);
+      });
+    }
+  }
+
+  // --- プレフィルド一体型カード表示 ---
+  function showPrefilledResult(selected) {
+    var name = selected.isDrug ? selected.model : (selected.maker + " " + selected.model);
+    statusMessage.textContent = name + "（プレフィルド・一体型）";
     statusMessage.className = "status-message";
 
-    results.forEach(function (row) {
-      var card = document.createElement("div");
-      card.className = "card";
-      card.innerHTML = buildCardHTML(row);
-      resultsContainer.appendChild(card);
-    });
+    var card = document.createElement("div");
+    card.className = "card card-prefilled";
+
+    var html = '<span class="card-category-tag tag-prefilled">プレフィルド</span>' +
+      '<div class="card-maker">' + escapeHTML(selected.maker) + "</div>" +
+      '<div class="card-model">' + escapeHTML(selected.isDrug ? selected.model : selected.model) + "</div>";
+
+    if (selected.spec) {
+      html += '<div class="card-specs">' + escapeHTML(selected.spec) + "</div>";
+    }
+    if (selected.isDrug && selected.deviceName) {
+      html += '<div class="card-specs">デバイス: ' + escapeHTML(selected.deviceName) + "</div>";
+    }
+
+    html += '<span class="card-badge badge-integrated">一体型</span>';
+    html += '<div class="card-notes">針と本体が一体型のため、別途針の準備は不要です</div>';
+
+    if (selected.notes && selected.notes.trim() !== "") {
+      html += '<div class="card-notes">' + escapeHTML(selected.notes) + "</div>";
+    }
+
+    card.innerHTML = html;
+    resultsContainer.appendChild(card);
   }
 
   // --- 結果カードHTML生成 ---
-  function buildCardHTML(row) {
-    var maker, model, specParts = [], compatibility, notes, source;
+  function buildUnifiedCardHTML(row, resultType, category) {
+    var maker, model, specParts = [];
 
-    if (currentTab === "syringe" || currentTab === "pen_device") {
-      // デバイスから検索 → 針を表示
+    if (resultType === "needle_result") {
       maker = row.needle_maker || "";
       model = row.needle_model || "";
       if (row.needle_gauge) specParts.push(row.needle_gauge);
       if (row.needle_length) specParts.push(row.needle_length);
       if (row.needle_connection) specParts.push(row.needle_connection);
     } else {
-      // 針から検索 → デバイスを表示
       maker = row.device_maker || "";
       model = row.device_model || "";
       if (row.device_spec) specParts.push(row.device_spec);
       if (row.device_connection) specParts.push(row.device_connection);
     }
 
-    compatibility = row.compatibility || "";
-    notes = row.notes || "";
-    source = row.source || "";
+    var displayCategory = category || (row.category || "").trim();
+    var compatibility = row.compatibility || "";
+    var notes = row.notes || "";
+    var source = row.source || "";
 
-    var html =
+    var html = "";
+    if (displayCategory) {
+      html += '<span class="card-category-tag tag-' + getCategoryClass(displayCategory) + '">' +
+              escapeHTML(displayCategory) + "</span>";
+    }
+
+    html +=
       '<div class="card-maker">' + escapeHTML(maker) + "</div>" +
       '<div class="card-model">' + escapeHTML(model) + "</div>";
 
@@ -466,11 +634,8 @@
   // --- タブ別プレースホルダー ---
   function getPlaceholder() {
     switch (currentTab) {
-      case "syringe": return "注射器の製品名やメーカー名を入力...";
-      case "needle": return "針の製品名やメーカー名を入力...";
-      case "pen_device": return "ペン型デバイス名やメーカー名を入力...";
-      case "pen_needle": return "ペンニードル名やメーカー名を入力...";
-      case "prefilled": return "プレフィルド製剤名で絞り込み...";
+      case "device": return "デバイス名・薬剤名・メーカー名を入力...";
+      case "needle_all": return "針の製品名やメーカー名を入力...";
       case "drug": return "薬剤名・一般名・適応で絞り込み...";
       default: return "検索...";
     }
@@ -499,9 +664,7 @@
     resultsContainer.innerHTML = "";
     searchInput.placeholder = getPlaceholder();
 
-    if (currentTab === "prefilled") {
-      showPrefilledList("");
-    } else if (currentTab === "drug") {
+    if (currentTab === "drug") {
       showDrugList("");
     } else {
       statusMessage.textContent = "製品名やメーカー名を入力して検索してください";
@@ -516,11 +679,6 @@
   // 入力イベント
   searchInput.addEventListener("input", function () {
     var query = searchInput.value.trim();
-
-    if (currentTab === "prefilled") {
-      showPrefilledList(query);
-      return;
-    }
 
     if (currentTab === "drug") {
       showDrugList(query);

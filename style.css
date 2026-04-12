@@ -64,8 +64,8 @@ header {
   min-width: 0;
   background: none;
   border: none;
-  padding: 10px 6px;
-  font-size: 0.82rem;
+  padding: 10px 12px;
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--text-muted);
   cursor: pointer;
@@ -159,6 +159,26 @@ header {
   color: var(--accent);
   margin-left: 6px;
 }
+
+.autocomplete-item .ac-bridge {
+  font-size: 0.75rem;
+  color: #6B7280;
+  margin-left: 6px;
+}
+
+.autocomplete-item .ac-category {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 5px;
+  border-radius: 3px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+.ac-category-syringe  { background: #DBEAFE; color: #1E40AF; }
+.ac-category-pen      { background: #FEF3C7; color: #92400E; }
+.ac-category-prefilled { background: #E2E8F0; color: #4A5568; }
 
 /* === Status Message === */
 
@@ -254,6 +274,22 @@ header {
   color: #A0AEC0;
 }
 
+/* === Category Tags on Cards === */
+
+.card-category-tag {
+  display: inline-block;
+  margin-bottom: 6px;
+  padding: 1px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.tag-syringe   { background: #DBEAFE; color: #1E40AF; }
+.tag-pen       { background: #FEF3C7; color: #92400E; }
+.tag-prefilled { background: #E2E8F0; color: #4A5568; }
+
 /* === Prefilled Card === */
 
 .card-prefilled {
@@ -283,8 +319,8 @@ header {
   }
 
   .tab {
-    font-size: 0.72rem;
-    padding: 8px 3px;
+    font-size: 0.78rem;
+    padding: 8px 6px;
   }
 
   .search-input {
