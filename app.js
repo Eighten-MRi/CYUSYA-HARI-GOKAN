@@ -203,26 +203,27 @@
 
   // --- オートコンプリート候補取得 ---
   function getCandidates(query) {
-    var list = getActiveList();
     var normalizedQuery = toKatakana(query).toLowerCase();
-
     if (normalizedQuery === "") return [];
 
     var matches = [];
-    for (var i = 0; i < list.length && matches.length < 8; i++) {
-      var item = list[i];
-      var text = toKatakana(item.maker + " " + item.model).toLowerCase();
-      if (text.indexOf(normalizedQuery) !== -1) {
-        matches.push(item);
-      }
-    }
 
-    // deviceタブのみ：薬剤名でも検索し、デバイス名へ橋渡し
-    if (currentTab === "device") {
+    if (currentTab === "needle_all") {
+      // 針タブ：針のメーカー・製品名で検索
+      var list = allNeedleList;
+      for (var i = 0; i < list.length && matches.length < 8; i++) {
+        var item = list[i];
+        var text = toKatakana(item.maker + " " + item.model).toLowerCase();
+        if (text.indexOf(normalizedQuery) !== -1) {
+          matches.push(item);
+        }
+      }
+    } else if (currentTab === "device") {
+      // 製品名から針タブ：薬剤名・一般名のみで検索
       for (var j = 0; j < drugsData.length && matches.length < 10; j++) {
         var drug = drugsData[j];
         var drugText = toKatakana(
-          (drug.brand_name || "") + " " + (drug.generic_name || "") + " " + (drug.maker || "")
+          (drug.brand_name || "") + " " + (drug.generic_name || "")
         ).toLowerCase();
         if (drugText.indexOf(normalizedQuery) !== -1 && drug.device_name && drug.device_name.trim() !== "") {
           matches.push({
@@ -555,7 +556,7 @@
   // --- タブ別プレースホルダー ---
   function getPlaceholder() {
     switch (currentTab) {
-      case "device": return "デバイス名・薬剤名・メーカー名を入力...";
+      case "device": return "薬剤名・一般名を入力...";
       case "needle_all": return "針の製品名やメーカー名を入力...";
       default: return "検索...";
     }
