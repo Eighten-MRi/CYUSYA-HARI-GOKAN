@@ -1,4 +1,4 @@
-/* === 注射と針の互換性検索 — スタイル === */
+/* === 在宅注射 互換性検索 — スタイル === */
 
 *,
 *::before,
@@ -17,6 +17,7 @@
   --text: #1A202C;
   --text-muted: #718096;
   --error: #E53E3E;
+  --warning: #DD6B20;
   --radius: 8px;
 }
 
@@ -43,7 +44,7 @@ header {
 /* === Container === */
 
 .container {
-  max-width: 640px;
+  max-width: 700px;
   margin: 0 auto;
   padding: 24px 16px;
 }
@@ -52,22 +53,26 @@ header {
 
 .tabs {
   display: flex;
+  flex-wrap: wrap;
   border-bottom: 2px solid var(--card-border);
   margin-bottom: 20px;
+  gap: 2px;
 }
 
 .tab {
-  flex: 1;
+  flex: 1 1 auto;
+  min-width: 0;
   background: none;
   border: none;
-  padding: 12px 8px;
-  font-size: 0.95rem;
+  padding: 10px 6px;
+  font-size: 0.82rem;
   font-weight: 600;
   color: var(--text-muted);
   cursor: pointer;
   border-bottom: 3px solid transparent;
   margin-bottom: -2px;
   transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
 }
 
 .tab:hover {
@@ -225,6 +230,16 @@ header {
   color: #2A4365;
 }
 
+.card .badge-incompatible {
+  background: #FED7D7;
+  color: #9B2C2C;
+}
+
+.card .badge-integrated {
+  background: #E2E8F0;
+  color: #4A5568;
+}
+
 .card .card-notes {
   margin-top: 8px;
   font-size: 0.85rem;
@@ -233,9 +248,21 @@ header {
   border-top: 1px solid var(--card-border);
 }
 
+.card .card-source {
+  margin-top: 6px;
+  font-size: 0.75rem;
+  color: #A0AEC0;
+}
+
+/* === Prefilled Card === */
+
+.card-prefilled {
+  border-left: 4px solid #A0AEC0;
+}
+
 /* === Responsive === */
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   header {
     font-size: 1.15rem;
     padding: 16px 12px;
@@ -245,9 +272,13 @@ header {
     padding: 16px 12px;
   }
 
+  .tabs {
+    gap: 0;
+  }
+
   .tab {
-    font-size: 0.85rem;
-    padding: 10px 4px;
+    font-size: 0.72rem;
+    padding: 8px 3px;
   }
 
   .search-input {

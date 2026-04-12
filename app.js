@@ -1,22 +1,29 @@
-// === 注射と針の互換性検索 — メインロジック ===
+// === 在宅注射 互換性検索 — メインロジック ===
 
 (function () {
   "use strict";
 
   // --- State ---
-  let compatibilityData = [];
-  let syringeList = []; // { maker, model }
-  let needleList = [];  // { maker, model }
-  let currentTab = "syringe"; // "syringe" | "needle"
-  let highlightIndex = -1;
-  let currentCandidates = [];
+  var allData = [];
+  var syringeData = [];   // category=注射器
+  var penData = [];        // category=ペン型
+  var prefilledData = [];  // category=プレフィルド
+
+  var syringeList = [];    // unique syringes (from syringeData)
+  var needleList = [];     // unique needles (from syringeData)
+  var penDeviceList = [];  // unique pen devices (from penData)
+  var penNeedleList = [];  // unique pen needles (from penData)
+
+  var currentTab = "syringe";
+  var highlightIndex = -1;
+  var currentCandidates = [];
 
   // --- DOM ---
-  const searchInput = document.getElementById("search-input");
-  const autocompleteList = document.getElementById("autocomplete-list");
-  const resultsContainer = document.getElementById("results");
-  const statusMessage = document.getElementById("status-message");
-  const tabs = document.querySelectorAll(".tab");
+  var searchInput = document.getElementById("search-input");
+  var autocompleteList = document.getElementById("autocomplete-list");
+  var resultsContainer = document.getElementById("results");
+  var statusMessage = document.getElementById("status-message");
+  var tabs = document.querySelectorAll(".tab");
 
   // --- ひらがな→カタカナ変換 ---
   function toKatakana(str) {
@@ -25,38 +32,86 @@
     });
   }
 
-  // --- 重複排除ユニークリスト生成 ---
-  function buildUniqueLists(data) {
-    const syringeSet = new Set();
-    const needleSet = new Set();
-    const syringes = [];
-    const needles = [];
+  // --- HTMLエスケープ ---
+  function escapeHTML(str) {
+    var div = document.createElement("div");
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+
+  // --- カテゴリ別にデータを振り分け＆ユニークリスト生成 ---
+  function buildAllLists(data) {
+    syringeData = [];
+    penData = [];
+    prefilledData = [];
 
     data.forEach(function (row) {
-      const sKey = row.syringe_maker + "\0" + row.syringe_model;
-      if (!syringeSet.has(sKey)) {
-        syringeSet.add(sKey);
-        syringes.push({
-          maker: row.syringe_maker,
-          model: row.syringe_model,
-          volume: row.syringe_volume_ml || "",
-          tipType: row.syringe_tip_type || ""
+      var cat = (row.category || "").trim();
+      if (cat === "注射器") syringeData.push(row);
+      else if (cat === "ペン型") penData.push(row);
+      else if (cat === "プレフィルド") prefilledData.push(row);
+    });
+
+    syringeList = buildUniqueDevices(syringeData);
+    needleList = buildUniqueNeedles(syringeData);
+    penDeviceList = buildUniqueDevices(penData);
+    penNeedleList = buildUniqueNeedles(penData);
+  }
+
+  function buildUniqueDevices(rows) {
+    var seen = new Set();
+    var list = [];
+    rows.forEach(function (row) {
+      var key = row.device_maker + "\0" + row.device_model;
+      if (!seen.has(key)) {
+        seen.add(key);
+        list.push({
+          maker: row.device_maker || "",
+          model: row.device_model || "",
+          spec: row.device_spec || "",
+          connection: row.device_connection || ""
         });
       }
-      const nKey = row.needle_maker + "\0" + row.needle_model;
-      if (!needleSet.has(nKey)) {
-        needleSet.add(nKey);
-        needles.push({
-          maker: row.needle_maker,
-          model: row.needle_model,
+    });
+    return list;
+  }
+
+  function buildUniqueNeedles(rows) {
+    var seen = new Set();
+    var list = [];
+    rows.forEach(function (row) {
+      if (!row.needle_maker && !row.needle_model) return;
+      var key = row.needle_maker + "\0" + row.needle_model;
+      if (!seen.has(key)) {
+        seen.add(key);
+        list.push({
+          maker: row.needle_maker || "",
+          model: row.needle_model || "",
           gauge: row.needle_gauge || "",
           length: row.needle_length || "",
           connection: row.needle_connection || ""
         });
       }
     });
+    return list;
+  }
 
-    return { syringes: syringes, needles: needles };
+  function buildUniquePrefilledDevices(rows) {
+    var seen = new Set();
+    var list = [];
+    rows.forEach(function (row) {
+      var key = row.device_maker + "\0" + row.device_model;
+      if (!seen.has(key)) {
+        seen.add(key);
+        list.push({
+          maker: row.device_maker || "",
+          model: row.device_model || "",
+          spec: row.device_spec || "",
+          notes: row.notes || ""
+        });
+      }
+    });
+    return list;
   }
 
   // --- CSV読み込み ---
@@ -81,10 +136,8 @@
           throw new Error("CSVパースエラー: " + result.errors[0].message);
         }
 
-        compatibilityData = result.data;
-        var lists = buildUniqueLists(compatibilityData);
-        syringeList = lists.syringes;
-        needleList = lists.needles;
+        allData = result.data;
+        buildAllLists(allData);
 
         statusMessage.textContent = "製品名やメーカー名を入力して検索してください";
         searchInput.disabled = false;
@@ -97,9 +150,21 @@
       });
   }
 
+  // --- 現在のタブに応じた検索対象リスト ---
+  function getActiveList() {
+    switch (currentTab) {
+      case "syringe": return syringeList;
+      case "needle": return needleList;
+      case "pen_device": return penDeviceList;
+      case "pen_needle": return penNeedleList;
+      default: return [];
+    }
+  }
+
   // --- オートコンプリート候補取得 ---
   function getCandidates(query) {
-    var list = currentTab === "syringe" ? syringeList : needleList;
+    if (currentTab === "prefilled") return [];
+    var list = getActiveList();
     var normalizedQuery = toKatakana(query).toLowerCase();
 
     if (normalizedQuery === "") return [];
@@ -131,9 +196,9 @@
       div.className = "autocomplete-item";
 
       var detailParts = [];
-      if (currentTab === "syringe") {
-        if (item.volume) detailParts.push(item.volume + "mL");
-        if (item.tipType) detailParts.push(item.tipType);
+      if (currentTab === "syringe" || currentTab === "pen_device") {
+        if (item.spec) detailParts.push(item.spec);
+        if (item.connection) detailParts.push(item.connection);
       } else {
         if (item.gauge) detailParts.push(item.gauge);
         if (item.length) detailParts.push(item.length);
@@ -163,13 +228,6 @@
     highlightIndex = -1;
   }
 
-  // --- HTMLエスケープ ---
-  function escapeHTML(str) {
-    var div = document.createElement("div");
-    div.appendChild(document.createTextNode(str));
-    return div.innerHTML;
-  }
-
   // --- 候補選択 ---
   function selectCandidate(item) {
     searchInput.value = item.maker + " " + item.model;
@@ -181,13 +239,22 @@
   function performSearch(selected) {
     resultsContainer.innerHTML = "";
 
-    var results;
-    if (currentTab === "syringe") {
-      results = compatibilityData.filter(function (row) {
-        return row.syringe_maker === selected.maker && row.syringe_model === selected.model;
+    var dataSource, results;
+
+    if (currentTab === "syringe" || currentTab === "needle") {
+      dataSource = syringeData;
+    } else if (currentTab === "pen_device" || currentTab === "pen_needle") {
+      dataSource = penData;
+    } else {
+      return;
+    }
+
+    if (currentTab === "syringe" || currentTab === "pen_device") {
+      results = dataSource.filter(function (row) {
+        return row.device_maker === selected.maker && row.device_model === selected.model;
       });
     } else {
-      results = compatibilityData.filter(function (row) {
+      results = dataSource.filter(function (row) {
         return row.needle_maker === selected.maker && row.needle_model === selected.model;
       });
     }
@@ -202,46 +269,126 @@
     statusMessage.className = "status-message";
 
     results.forEach(function (row) {
-      var maker, model, notes, specs, compatibility;
-      var specParts = [];
-      if (currentTab === "syringe") {
-        maker = row.needle_maker;
-        model = row.needle_model;
-        if (row.needle_gauge) specParts.push(row.needle_gauge);
-        if (row.needle_length) specParts.push(row.needle_length);
-      } else {
-        maker = row.syringe_maker;
-        model = row.syringe_model;
-        if (row.syringe_volume_ml) specParts.push(row.syringe_volume_ml + "mL");
-        if (row.syringe_tip_type) specParts.push(row.syringe_tip_type);
-      }
-      specs = specParts.join(" / ");
-      notes = row.notes;
-      compatibility = row.compatibility || "";
-
       var card = document.createElement("div");
       card.className = "card";
+      card.innerHTML = buildCardHTML(row);
+      resultsContainer.appendChild(card);
+    });
+  }
+
+  // --- 結果カードHTML生成 ---
+  function buildCardHTML(row) {
+    var maker, model, specParts = [], compatibility, notes, source;
+
+    if (currentTab === "syringe" || currentTab === "pen_device") {
+      // デバイスから検索 → 針を表示
+      maker = row.needle_maker || "";
+      model = row.needle_model || "";
+      if (row.needle_gauge) specParts.push(row.needle_gauge);
+      if (row.needle_length) specParts.push(row.needle_length);
+      if (row.needle_connection) specParts.push(row.needle_connection);
+    } else {
+      // 針から検索 → デバイスを表示
+      maker = row.device_maker || "";
+      model = row.device_model || "";
+      if (row.device_spec) specParts.push(row.device_spec);
+      if (row.device_connection) specParts.push(row.device_connection);
+    }
+
+    compatibility = row.compatibility || "";
+    notes = row.notes || "";
+    source = row.source || "";
+
+    var html =
+      '<div class="card-maker">' + escapeHTML(maker) + "</div>" +
+      '<div class="card-model">' + escapeHTML(model) + "</div>";
+
+    if (specParts.length > 0) {
+      html += '<div class="card-specs">' + escapeHTML(specParts.join(" / ")) + "</div>";
+    }
+
+    if (compatibility) {
+      html += '<span class="card-badge ' + getBadgeClass(compatibility) + '">' +
+        escapeHTML(compatibility) + "</span>";
+    }
+
+    if (notes && notes.trim() !== "") {
+      html += '<div class="card-notes">' + escapeHTML(notes) + "</div>";
+    }
+
+    if (source && source.trim() !== "") {
+      html += '<div class="card-source">出典: ' + escapeHTML(source) + "</div>";
+    }
+
+    return html;
+  }
+
+  // --- バッジクラス判定 ---
+  function getBadgeClass(compatibility) {
+    switch (compatibility) {
+      case "確認済": return "badge-confirmed";
+      case "規格適合": return "badge-standard";
+      case "非互換": return "badge-incompatible";
+      case "一体型": return "badge-integrated";
+      default: return "badge-standard";
+    }
+  }
+
+  // --- プレフィルド一覧表示 ---
+  function showPrefilledList(filterText) {
+    resultsContainer.innerHTML = "";
+    var items = buildUniquePrefilledDevices(prefilledData);
+
+    if (filterText) {
+      var q = toKatakana(filterText).toLowerCase();
+      items = items.filter(function (item) {
+        var text = toKatakana(item.maker + " " + item.model + " " + item.spec).toLowerCase();
+        return text.indexOf(q) !== -1;
+      });
+    }
+
+    if (items.length === 0) {
+      statusMessage.textContent = "該当するプレフィルド製剤が見つかりませんでした";
+      statusMessage.className = "status-message";
+      return;
+    }
+
+    statusMessage.textContent = items.length + " 件のプレフィルド製剤";
+    statusMessage.className = "status-message";
+
+    items.forEach(function (item) {
+      var card = document.createElement("div");
+      card.className = "card card-prefilled";
 
       var html =
-        '<div class="card-maker">' + escapeHTML(maker) + "</div>" +
-        '<div class="card-model">' + escapeHTML(model) + "</div>";
+        '<div class="card-maker">' + escapeHTML(item.maker) + "</div>" +
+        '<div class="card-model">' + escapeHTML(item.model) + "</div>";
 
-      if (specs) {
-        html += '<div class="card-specs">' + escapeHTML(specs) + "</div>";
+      if (item.spec) {
+        html += '<div class="card-specs">' + escapeHTML(item.spec) + "</div>";
       }
 
-      if (compatibility) {
-        var badgeClass = compatibility === "確認済" ? "badge-confirmed" : "badge-standard";
-        html += '<span class="card-badge ' + badgeClass + '">' + escapeHTML(compatibility) + "</span>";
-      }
+      html += '<span class="card-badge badge-integrated">一体型</span>';
 
-      if (notes && notes.trim() !== "") {
-        html += '<div class="card-notes">' + escapeHTML(notes) + "</div>";
+      if (item.notes && item.notes.trim() !== "") {
+        html += '<div class="card-notes">' + escapeHTML(item.notes) + "</div>";
       }
 
       card.innerHTML = html;
       resultsContainer.appendChild(card);
     });
+  }
+
+  // --- タブ別プレースホルダー ---
+  function getPlaceholder() {
+    switch (currentTab) {
+      case "syringe": return "注射器の製品名やメーカー名を入力...";
+      case "needle": return "針の製品名やメーカー名を入力...";
+      case "pen_device": return "ペン型デバイス名やメーカー名を入力...";
+      case "pen_needle": return "ペンニードル名やメーカー名を入力...";
+      case "prefilled": return "プレフィルド製剤名で絞り込み...";
+      default: return "検索...";
+    }
   }
 
   // --- ハイライト更新 ---
@@ -255,11 +402,39 @@
     }
   }
 
+  // --- タブ切替処理 ---
+  function switchTab(tabName) {
+    currentTab = tabName;
+
+    tabs.forEach(function (t) { t.classList.remove("active"); });
+    document.querySelector('.tab[data-tab="' + tabName + '"]').classList.add("active");
+
+    searchInput.value = "";
+    hideAutocomplete();
+    resultsContainer.innerHTML = "";
+    searchInput.placeholder = getPlaceholder();
+
+    if (currentTab === "prefilled") {
+      showPrefilledList("");
+    } else {
+      statusMessage.textContent = "製品名やメーカー名を入力して検索してください";
+      statusMessage.className = "status-message";
+    }
+
+    searchInput.focus();
+  }
+
   // --- イベントリスナー ---
 
   // 入力イベント
   searchInput.addEventListener("input", function () {
     var query = searchInput.value.trim();
+
+    if (currentTab === "prefilled") {
+      showPrefilledList(query);
+      return;
+    }
+
     var candidates = getCandidates(query);
     showAutocomplete(candidates);
     if (query === "") {
@@ -297,21 +472,9 @@
   });
 
   // タブ切り替え
-  tabs.forEach(function (tabEl, idx) {
+  tabs.forEach(function (tabEl) {
     tabEl.addEventListener("click", function () {
-      tabs.forEach(function (t) { t.classList.remove("active"); });
-      tabEl.classList.add("active");
-      currentTab = idx === 0 ? "syringe" : "needle";
-
-      searchInput.value = "";
-      hideAutocomplete();
-      resultsContainer.innerHTML = "";
-      statusMessage.textContent = "製品名やメーカー名を入力して検索してください";
-      statusMessage.className = "status-message";
-      searchInput.placeholder = idx === 0
-        ? "注射器の製品名やメーカー名を入力..."
-        : "針の製品名やメーカー名を入力...";
-      searchInput.focus();
+      switchTab(tabEl.getAttribute("data-tab"));
     });
   });
 

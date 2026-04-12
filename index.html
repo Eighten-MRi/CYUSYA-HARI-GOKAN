@@ -3,17 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>注射と針の互換性検索</title>
+  <title>在宅注射 互換性検索</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js" defer></script>
 </head>
 <body>
-  <header>注射と針の互換性検索</header>
+  <header>在宅注射 互換性検索</header>
 
   <div class="container">
     <div class="tabs">
-      <button class="tab active">注射器から針を探す</button>
-      <button class="tab">針から注射器を探す</button>
+      <button class="tab active" data-tab="syringe">注射器→針</button>
+      <button class="tab" data-tab="needle">針→注射器</button>
+      <button class="tab" data-tab="pen_device">ペン型→ニードル</button>
+      <button class="tab" data-tab="pen_needle">ニードル→ペン型</button>
+      <button class="tab" data-tab="prefilled">プレフィルド</button>
     </div>
 
     <div class="search-container">
