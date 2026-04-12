@@ -8,6 +8,7 @@
   var syringeData = [];   // category=注射器
   var penData = [];        // category=ペン型
   var prefilledData = [];  // category=プレフィルド
+  var drugsData = [];      // c101_medications.csv
 
   var syringeList = [];    // unique syringes (from syringeData)
   var needleList = [];     // unique needles (from syringeData)
@@ -119,26 +120,31 @@
     statusMessage.textContent = "データ読み込み中...";
     statusMessage.className = "status-message";
 
-    fetch("data/compatibility.csv")
+    var compatPromise = fetch("data/compatibility.csv")
       .then(function (response) {
-        if (!response.ok) {
-          throw new Error("CSV読み込みエラー（HTTP " + response.status + "）");
-        }
+        if (!response.ok) throw new Error("compatibility.csv読み込みエラー（HTTP " + response.status + "）");
         return response.text();
       })
       .then(function (text) {
-        var result = Papa.parse(text, {
-          header: true,
-          skipEmptyLines: true,
-        });
-
-        if (result.errors.length > 0) {
-          throw new Error("CSVパースエラー: " + result.errors[0].message);
-        }
-
+        var result = Papa.parse(text, { header: true, skipEmptyLines: true });
+        if (result.errors.length > 0) throw new Error("CSVパースエラー: " + result.errors[0].message);
         allData = result.data;
         buildAllLists(allData);
+      });
 
+    var drugsPromise = fetch("data/c101_medications.csv")
+      .then(function (response) {
+        if (!response.ok) throw new Error("c101_medications.csv読み込みエラー（HTTP " + response.status + "）");
+        return response.text();
+      })
+      .then(function (text) {
+        var result = Papa.parse(text, { header: true, skipEmptyLines: true });
+        if (result.errors.length > 0) throw new Error("薬剤CSVパースエラー: " + result.errors[0].message);
+        drugsData = result.data;
+      });
+
+    Promise.all([compatPromise, drugsPromise])
+      .then(function () {
         statusMessage.textContent = "製品名やメーカー名を入力して検索してください";
         searchInput.disabled = false;
         searchInput.focus();
@@ -161,9 +167,87 @@
     }
   }
 
+  // --- 薬剤一覧表示 ---
+  function showDrugList(filterText) {
+    resultsContainer.innerHTML = "";
+    var items = drugsData;
+
+    if (filterText) {
+      var q = toKatakana(filterText).toLowerCase();
+      items = items.filter(function (row) {
+        var text = toKatakana(
+          (row.brand_name || "") + " " +
+          (row.generic_name || "") + " " +
+          (row.maker || "") + " " +
+          (row.indication || "")
+        ).toLowerCase();
+        return text.indexOf(q) !== -1;
+      });
+    }
+
+    if (items.length === 0) {
+      statusMessage.textContent = "該当する薬剤が見つかりませんでした";
+      statusMessage.className = "status-message";
+      return;
+    }
+
+    statusMessage.textContent = items.length + " 件の薬剤が見つかりました";
+    statusMessage.className = "status-message";
+
+    items.forEach(function (row) {
+      var card = document.createElement("div");
+      card.className = "card card-drug";
+      card.innerHTML = buildDrugCardHTML(row);
+      resultsContainer.appendChild(card);
+    });
+  }
+
+  function buildDrugCardHTML(row) {
+    var html = '<div class="card-maker">' + escapeHTML(row.maker || "") + "</div>" +
+      '<div class="card-model">' + escapeHTML(row.brand_name || "") + "</div>";
+
+    if (row.generic_name) {
+      html += '<div class="card-specs">' + escapeHTML(row.generic_name) + "</div>";
+    }
+
+    var deviceText = row.device_type || "";
+    if (row.device_name && row.device_name.trim() && row.device_name !== "") {
+      deviceText += "（" + row.device_name + "）";
+    }
+    if (deviceText) {
+      html += '<div class="card-specs">デバイス: ' + escapeHTML(deviceText) + "</div>";
+    }
+
+    if (row.dose) {
+      html += '<div class="card-specs">用量: ' + escapeHTML(row.dose) + "</div>";
+    }
+
+    if (row.frequency) {
+      html += '<div class="card-specs">投与頻度: ' + escapeHTML(row.frequency) + "</div>";
+    }
+
+    if (row.indication) {
+      html += '<div class="card-specs">適応: ' + escapeHTML(row.indication) + "</div>";
+    }
+
+    if (row.self_injection) {
+      var badgeClass = row.self_injection === "可" ? "badge-confirmed" :
+        row.self_injection.indexOf("条件") !== -1 ? "badge-standard" : "badge-incompatible";
+      html += '<span class="card-badge ' + badgeClass + '">自己注射: ' + escapeHTML(row.self_injection) + "</span>";
+    }
+
+    // ペン型はJIS A型ペンニードル対応の注記
+    var dt = (row.device_type || "").toLowerCase();
+    if (dt.indexOf("ペン") !== -1 || dt.indexOf("カートリッジ") !== -1) {
+      html += '<div class="card-notes">JIS T 3226-2 A型ペンニードルが使用可能</div>';
+    }
+
+    return html;
+  }
+
   // --- オートコンプリート候補取得 ---
   function getCandidates(query) {
-    if (currentTab === "prefilled") return [];
+    if (currentTab === "prefilled" || currentTab === "drug") return [];
     var list = getActiveList();
     var normalizedQuery = toKatakana(query).toLowerCase();
 
@@ -387,6 +471,7 @@
       case "pen_device": return "ペン型デバイス名やメーカー名を入力...";
       case "pen_needle": return "ペンニードル名やメーカー名を入力...";
       case "prefilled": return "プレフィルド製剤名で絞り込み...";
+      case "drug": return "薬剤名・一般名・適応で絞り込み...";
       default: return "検索...";
     }
   }
@@ -416,6 +501,8 @@
 
     if (currentTab === "prefilled") {
       showPrefilledList("");
+    } else if (currentTab === "drug") {
+      showDrugList("");
     } else {
       statusMessage.textContent = "製品名やメーカー名を入力して検索してください";
       statusMessage.className = "status-message";
@@ -432,6 +519,11 @@
 
     if (currentTab === "prefilled") {
       showPrefilledList(query);
+      return;
+    }
+
+    if (currentTab === "drug") {
+      showDrugList(query);
       return;
     }
 
