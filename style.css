@@ -296,12 +296,6 @@ header {
   border-left: 4px solid #A0AEC0;
 }
 
-/* === Drug Card === */
-
-.card-drug {
-  border-left: 4px solid #48BB78;
-}
-
 /* === Responsive === */
 
 @media (max-width: 600px) {

@@ -201,87 +201,8 @@
     }
   }
 
-  // --- 薬剤一覧表示 ---
-  function showDrugList(filterText) {
-    resultsContainer.innerHTML = "";
-    var items = drugsData;
-
-    if (filterText) {
-      var q = toKatakana(filterText).toLowerCase();
-      items = items.filter(function (row) {
-        var text = toKatakana(
-          (row.brand_name || "") + " " +
-          (row.generic_name || "") + " " +
-          (row.maker || "") + " " +
-          (row.indication || "")
-        ).toLowerCase();
-        return text.indexOf(q) !== -1;
-      });
-    }
-
-    if (items.length === 0) {
-      statusMessage.textContent = "該当する薬剤が見つかりませんでした";
-      statusMessage.className = "status-message";
-      return;
-    }
-
-    statusMessage.textContent = items.length + " 件の薬剤が見つかりました";
-    statusMessage.className = "status-message";
-
-    items.forEach(function (row) {
-      var card = document.createElement("div");
-      card.className = "card card-drug";
-      card.innerHTML = buildDrugCardHTML(row);
-      resultsContainer.appendChild(card);
-    });
-  }
-
-  function buildDrugCardHTML(row) {
-    var html = '<div class="card-maker">' + escapeHTML(row.maker || "") + "</div>" +
-      '<div class="card-model">' + escapeHTML(row.brand_name || "") + "</div>";
-
-    if (row.generic_name) {
-      html += '<div class="card-specs">' + escapeHTML(row.generic_name) + "</div>";
-    }
-
-    var deviceText = row.device_type || "";
-    if (row.device_name && row.device_name.trim() && row.device_name !== "") {
-      deviceText += "（" + row.device_name + "）";
-    }
-    if (deviceText) {
-      html += '<div class="card-specs">デバイス: ' + escapeHTML(deviceText) + "</div>";
-    }
-
-    if (row.dose) {
-      html += '<div class="card-specs">用量: ' + escapeHTML(row.dose) + "</div>";
-    }
-
-    if (row.frequency) {
-      html += '<div class="card-specs">投与頻度: ' + escapeHTML(row.frequency) + "</div>";
-    }
-
-    if (row.indication) {
-      html += '<div class="card-specs">適応: ' + escapeHTML(row.indication) + "</div>";
-    }
-
-    if (row.self_injection) {
-      var badgeClass = row.self_injection === "可" ? "badge-confirmed" :
-        row.self_injection.indexOf("条件") !== -1 ? "badge-standard" : "badge-incompatible";
-      html += '<span class="card-badge ' + badgeClass + '">自己注射: ' + escapeHTML(row.self_injection) + "</span>";
-    }
-
-    // ペン型はJIS A型ペンニードル対応の注記
-    var dt = (row.device_type || "").toLowerCase();
-    if (dt.indexOf("ペン") !== -1 || dt.indexOf("カートリッジ") !== -1) {
-      html += '<div class="card-notes">JIS T 3226-2 A型ペンニードルが使用可能</div>';
-    }
-
-    return html;
-  }
-
   // --- オートコンプリート候補取得 ---
   function getCandidates(query) {
-    if (currentTab === "drug") return [];
     var list = getActiveList();
     var normalizedQuery = toKatakana(query).toLowerCase();
 
@@ -636,7 +557,6 @@
     switch (currentTab) {
       case "device": return "デバイス名・薬剤名・メーカー名を入力...";
       case "needle_all": return "針の製品名やメーカー名を入力...";
-      case "drug": return "薬剤名・一般名・適応で絞り込み...";
       default: return "検索...";
     }
   }
@@ -664,12 +584,8 @@
     resultsContainer.innerHTML = "";
     searchInput.placeholder = getPlaceholder();
 
-    if (currentTab === "drug") {
-      showDrugList("");
-    } else {
-      statusMessage.textContent = "製品名やメーカー名を入力して検索してください";
-      statusMessage.className = "status-message";
-    }
+    statusMessage.textContent = "製品名やメーカー名を入力して検索してください";
+    statusMessage.className = "status-message";
 
     searchInput.focus();
   }
@@ -679,11 +595,6 @@
   // 入力イベント
   searchInput.addEventListener("input", function () {
     var query = searchInput.value.trim();
-
-    if (currentTab === "drug") {
-      showDrugList(query);
-      return;
-    }
 
     var candidates = getCandidates(query);
     showAutocomplete(candidates);
