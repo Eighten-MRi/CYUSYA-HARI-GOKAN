@@ -3,6 +3,20 @@
 (function () {
   "use strict";
 
+  // --- カートリッジ→対応ペン本体マッピング ---
+  // キー: c101_medications.csv の maker|device_name
+  // 値の maker: compatibility.csv の表記に合わせる（スペースなし）
+  var CARTRIDGE_TO_PENS = {
+    "ノボ ノルディスク|ペンフィル 3mL": [
+      { maker: "ノボノルディスク", model: "ノボペン5" },
+      { maker: "ノボノルディスク", model: "ノボペン エコーPlus" }
+    ],
+    "日本イーライリリー|カート 3mL": [
+      { maker: "日本イーライリリー", model: "ヒューマペン サビオ" }
+    ],
+    "サノフィ|カート 3mL": null  // 日本では再利用型ペン販売終了
+  };
+
   // --- State ---
   var allData = [];
   var syringeData = [];   // category=注射器
@@ -336,6 +350,21 @@
           return;
         }
 
+        // ペン型カートリッジの場合はCARTRIDGE_TO_PENSで対応ペンを探す
+        if ((selected.deviceType || "") === "ペン型カートリッジ") {
+          var cartKey = selected.maker + "|" + devName;
+          if (cartKey in CARTRIDGE_TO_PENS) {
+            var penEntries = CARTRIDGE_TO_PENS[cartKey];
+            if (penEntries === null) {
+              showCartridgeDiscontinuedResult(selected);
+            } else {
+              showCartridgePenResult(selected, penEntries);
+            }
+            return;
+          }
+          // キーがない場合はフォールスルーして既存ロジックへ
+        }
+
         // ペン型データから検索
         results = penData.filter(function (row) {
           return row.device_model === devName;
@@ -442,6 +471,59 @@
     }
 
     card.innerHTML = html;
+    resultsContainer.appendChild(card);
+  }
+
+  // --- カートリッジ薬剤：再利用型ペン本体＋対応針の表示 ---
+  function showCartridgePenResult(selected, penEntries) {
+    statusMessage.textContent =
+      selected.model + "（" + selected.deviceName + "）— 再利用型ペン本体と対応針: " + penEntries.length + " 機種";
+    statusMessage.className = "status-message";
+
+    // インフォカード（カートリッジ説明）
+    var infoCard = document.createElement("div");
+    infoCard.className = "card card-cartridge-info";
+    infoCard.innerHTML =
+      '<span class="card-category-tag tag-pen">ペン型カートリッジ</span>' +
+      '<div class="card-model">' + escapeHTML(selected.model) + '</div>' +
+      '<div class="card-specs">カートリッジ: ' + escapeHTML(selected.deviceName) + '</div>' +
+      '<div class="card-notes">カートリッジ製剤は別売りの再利用型ペン本体にセットして使用します。下記ペン本体を用意し、JIS T 3226-2 A型対応のペン針を取り付けてください。</div>';
+    resultsContainer.appendChild(infoCard);
+
+    penEntries.forEach(function (penEntry) {
+      // ペン本体カード
+      var penCard = document.createElement("div");
+      penCard.className = "card card-pen-body";
+      penCard.innerHTML =
+        '<span class="card-category-tag tag-pen">再利用型ペン本体</span>' +
+        '<div class="card-maker">' + escapeHTML(penEntry.maker) + '</div>' +
+        '<div class="card-model">' + escapeHTML(penEntry.model) + '</div>';
+      resultsContainer.appendChild(penCard);
+
+      // そのペン対応の針カード
+      var needles = penData.filter(function (row) {
+        return row.device_maker === penEntry.maker && row.device_model === penEntry.model;
+      });
+      needles.forEach(function (row) {
+        var needleCard = document.createElement("div");
+        needleCard.className = "card card-needle-child";
+        needleCard.innerHTML = buildUnifiedCardHTML(row, "needle_result");
+        resultsContainer.appendChild(needleCard);
+      });
+    });
+  }
+
+  // --- カートリッジ薬剤：対応ペン本体が販売終了の場合 ---
+  function showCartridgeDiscontinuedResult(selected) {
+    statusMessage.textContent = selected.model + "（" + selected.deviceName + "）";
+    statusMessage.className = "status-message";
+    var card = document.createElement("div");
+    card.className = "card card-cartridge-info";
+    card.innerHTML =
+      '<span class="card-category-tag tag-pen">ペン型カートリッジ</span>' +
+      '<div class="card-model">' + escapeHTML(selected.model) + '</div>' +
+      '<div class="card-specs">カートリッジ: ' + escapeHTML(selected.deviceName) + '</div>' +
+      '<div class="card-notes">日本では本剤に対応する再利用型ペン本体は現在販売されていません。ソロスター（プレフィルドペン）版のご利用をご確認ください。</div>';
     resultsContainer.appendChild(card);
   }
 

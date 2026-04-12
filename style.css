@@ -298,6 +298,20 @@ header {
 
 /* === Responsive === */
 
+/* === カートリッジ薬剤用カード === */
+.card-cartridge-info {
+  border-left: 4px solid #F59E0B;
+}
+
+.card-pen-body {
+  border-left: 4px solid #0077B6;
+}
+
+.card-needle-child {
+  margin-left: 16px;
+  border-left: 4px solid #93C5FD;
+}
+
 @media (max-width: 600px) {
   header {
     font-size: 1.15rem;
