@@ -38,6 +38,23 @@
 | さっぽろ内科・リウマチ膠原病クリニック | https://sapporo-rac.jp/treatment/biologicalproducts/ | 自己注射可能な生物学的製剤リスト | 中 |
 | 東京女子医科大学 膠原病リウマチ痛風センター | https://twmu-rheum-ior.jp/diagnosis/ra/medication/biologics.html | 各製剤の投与方法・特徴 | 高 |
 
+### ペン針製品情報
+
+| ソース | URL | 取得データ | 信頼度 |
+|--------|-----|-----------|--------|
+| 新薬と治療 2020（査読誌） | https://www.shinryo-to-shinyaku.com/db/pdf/sin_0056_09_0674.pdf | BD マイクロファインプラス / Micro-Fine Ultra、Ypsomed mylife Clickfine / Penfine 各種サイズ | 高 |
+| 愛媛大学医学部附属病院 薬剤部ニュース | https://www.hsp.ehime-u.ac.jp/medicine/wp-content/uploads/202102-2DInews.pdf | テルモ ナノパスニードルⅡ（ナノパス34 / ナノパスJr.）、BD マイクロファインプラス 31G×5mm | 高 |
+| BD ジャパン 公式製品PDF | https://www.bdj.co.jp/diabetes/products/hkdqj200000vk0sh-att/hkdqj200000vnj22.pdf | BD マイクロファイン プロ 32G×4mm | 最高 |
+| PMDA（医療機器添付文書） | https://www.pmda.go.jp/PmdaSearch/kikiDetail/OldPdfData/227AABZX00122000_A_01/1 | ニプロ ペンニードル / ペンニードルプラス 32G×4mm | 最高 |
+| 厚生労働省 審議資料（2008年） | https://www.mhlw.go.jp/shingi/2008/12/dl/s1215-9e_0002.pdf | ニプロ ペンニードル 30G×8mm | 最高 |
+| EPJメディカルサービス（Caremed）公式PDF | https://www.carelife-japan.co.jp/product/images/medfine.pdf | メッドファイン 29–32G・4–12mm 全11SKU | 高 |
+
+**共通事項**: 上記製品はいずれも **JIS T 3226-2 A型（ユニバーサル規格、ISO 11608-2）** に適合し、全メーカーのペン本体で使用可能（日本糖尿病協会の公式ガイダンスと整合）。
+
+**未調査項目**:
+- **Ypsomed mylife Clickfine / Penfine Classic / AutoProtect**: 新薬と治療2020に記載ありだが、2026年時点の国内正規流通状況が未確認のため今回は未登録。
+- **ノボツイスト（NovoTwist、ノボ ノルディスク）**: 独自規格の可能性あり、別ステップで追加調査予定。
+
 ### 制度・規制関連
 
 | ソース | URL | 取得データ | 信頼度 |
