@@ -4,7 +4,7 @@
   "use strict";
 
   // --- カートリッジ→対応ペン本体マッピング ---
-  // キー: c101_medications.csv の maker|device_name
+  // キー: medications.csv の maker|device_name
   // 値の maker: compatibility.csv の表記に合わせる（スペースなし）
   var CARTRIDGE_TO_PENS = {
     "ノボ ノルディスク|ペンフィル 3mL": [
@@ -22,7 +22,7 @@
   var syringeData = [];   // category=注射器
   var penData = [];        // category=ペン型
   var prefilledData = [];  // category=プレフィルド
-  var drugsData = [];      // c101_medications.csv
+  var drugsData = [];      // medications.csv
 
   var syringeList = [];    // unique syringes (from syringeData)
   var needleList = [];     // unique needles (from syringeData)
@@ -182,9 +182,9 @@
         buildAllLists(allData);
       });
 
-    var drugsPromise = fetch("data/c101_medications.csv")
+    var drugsPromise = fetch("data/medications.csv")
       .then(function (response) {
-        if (!response.ok) throw new Error("c101_medications.csv読み込みエラー（HTTP " + response.status + "）");
+        if (!response.ok) throw new Error("medications.csv読み込みエラー（HTTP " + response.status + "）");
         return response.text();
       })
       .then(function (text) {

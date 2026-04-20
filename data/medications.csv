@@ -1,0 +1,152 @@
+﻿id,category_id,active_ingredient,generic_name,brand_name,product_type,maker,device_type,device_name,dose,administration_route,frequency,indication,self_injection,needle_exchange_required,source,last_verified
+1,15,リラグルチド,グルカゴン様ペプチド-1受容体アゴニスト,ビクトーザ皮下注,先発品,ノボ ノルディスク,プレフィルドペン,ビクトーザペン,18mg/3mL,皮下注,毎日,2型糖尿病,可,必要,https://kanri.nkdesk.com/drags/glp.php,2026-04
+2,15,エキセナチド,グルカゴン様ペプチド-1受容体アゴニスト,バイエッタ皮下注,先発品,アストラゼネカ,プレフィルドペン,,5μg/10μg,皮下注,1日2回,2型糖尿病,可,必要,https://kanri.nkdesk.com/drags/glp.php,2026-04
+3,15,エキセナチド,グルカゴン様ペプチド-1受容体アゴニスト,ビデュリオン皮下注,先発品,アストラゼネカ,プレフィルドペン,,2mg,皮下注,週1回,2型糖尿病,可,必要,https://kanri.nkdesk.com/drags/glp.php,2026-04
+4,15,リキシセナチド,グルカゴン様ペプチド-1受容体アゴニスト,リキスミア皮下注,先発品,サノフィ,プレフィルドペン,,10μg/20μg,皮下注,毎日,2型糖尿病,可,必要,https://kanri.nkdesk.com/drags/glp.php,2026-04
+5,15,デュラグルチド,グルカゴン様ペプチド-1受容体アゴニスト,トルリシティ皮下注,先発品,日本イーライリリー,一体型使い捨て,アテオス,0.75mg/1.5mg,皮下注,週1回,2型糖尿病,可,不要,https://kanri.nkdesk.com/drags/glp.php,2026-04
+6,15,セマグルチド,グルカゴン様ペプチド-1受容体アゴニスト,オゼンピック皮下注,先発品,ノボ ノルディスク,プレフィルドペン,オゼンピックペン,0.25mg/0.5mg/1mg/2mg,皮下注,週1回,2型糖尿病,可,必要,https://kanri.nkdesk.com/drags/glp.php,2026-04
+7,15,セマグルチド,グルカゴン様ペプチド-1受容体アゴニスト,ウゴービ皮下注 SD型,先発品,ノボ ノルディスク,一体型使い捨て,ウゴービSD,0.25〜2.4mg,皮下注,週1回,肥満症,可,不要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01493,2026-04
+8,15,セマグルチド,グルカゴン様ペプチド-1受容体アゴニスト,ウゴービ皮下注 ペン型,先発品,ノボ ノルディスク,プレフィルドペン,ウゴービペン,0.25〜2.4mg,皮下注,週1回,肥満症,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01493,2026-04
+9,63,チルゼパチド,チルゼパチド製剤,マンジャロ皮下注,先発品,日本イーライリリー,一体型使い捨て,アテオス,2.5〜15mg,皮下注,週1回,2型糖尿病,可,不要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01493,2026-04
+10,63,チルゼパチド,チルゼパチド製剤,ゼップバウンド皮下注,先発品,日本イーライリリー,一体型使い捨て,アテオス,2.5〜15mg,皮下注,週1回,肥満症,可,不要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01493,2026-04
+11,46,インスリン デグルデク・リラグルチド,インスリン・GLP-1受容体アゴニスト配合剤,ゾルトファイ配合注,先発品,ノボ ノルディスク,プレフィルドペン,フレックスタッチ,100単位/0.036mg,皮下注,毎日,2型糖尿病,可,必要,https://kanri.nkdesk.com/chouzai/chouzai5.php,2026-04
+12,46,インスリン グラルギン・リキシセナチド,インスリン・GLP-1受容体アゴニスト配合剤,ソリクア配合注,先発品,サノフィ,プレフィルドペン,ソロスター,100単位/1μg,皮下注,毎日,2型糖尿病,可,必要,https://kanri.nkdesk.com/chouzai/chouzai5.php,2026-04
+13,1,インスリン アスパルト,インスリン製剤（超速効型）,フィアスプ注,先発品,ノボ ノルディスク,プレフィルドペン,フレックスタッチ,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+14,1,インスリン アスパルト,インスリン製剤（超速効型）,フィアスプ注,先発品,ノボ ノルディスク,ペン型カートリッジ,ペンフィル,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+15,1,インスリン アスパルト,インスリン製剤（超速効型）,フィアスプ注,先発品,ノボ ノルディスク,バイアル,,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+16,1,インスリン アスパルト,インスリン製剤（超速効型）,ノボラピッド注,先発品,ノボ ノルディスク,プレフィルドペン,フレックスタッチ,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+17,1,インスリン アスパルト,インスリン製剤（超速効型）,ノボラピッド注,先発品,ノボ ノルディスク,プレフィルドペン,フレックスペン,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+18,1,インスリン アスパルト,インスリン製剤（超速効型）,ノボラピッド注,先発品,ノボ ノルディスク,ペン型カートリッジ,ペンフィル,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+19,1,インスリン アスパルト,インスリン製剤（超速効型）,ノボラピッド注,先発品,ノボ ノルディスク,バイアル,,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+20,1,インスリン リスプロ,インスリン製剤（超速効型）,ルムジェブ注,先発品,日本イーライリリー,プレフィルドペン,ミリオペン,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+21,1,インスリン リスプロ,インスリン製剤（超速効型）,ルムジェブ注,先発品,日本イーライリリー,プレフィルドペン,ミリオペンHD,200単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+22,1,インスリン リスプロ,インスリン製剤（超速効型）,ルムジェブ注,先発品,日本イーライリリー,ペン型カートリッジ,カート,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+23,1,インスリン リスプロ,インスリン製剤（超速効型）,ルムジェブ注,先発品,日本イーライリリー,バイアル,,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+24,1,インスリン リスプロ,インスリン製剤（超速効型）,ヒューマログ注,先発品,日本イーライリリー,プレフィルドペン,ミリオペン,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+25,1,インスリン リスプロ,インスリン製剤（超速効型）,ヒューマログ注,先発品,日本イーライリリー,プレフィルドペン,ミリオペンHD,200単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+26,1,インスリン リスプロ,インスリン製剤（超速効型）,ヒューマログ注,先発品,日本イーライリリー,ペン型カートリッジ,カート,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+27,1,インスリン リスプロ,インスリン製剤（超速効型）,ヒューマログ注,先発品,日本イーライリリー,バイアル,,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+28,1,インスリン グルリジン,インスリン製剤（超速効型）,アピドラ注,先発品,サノフィ,プレフィルドペン,ソロスター,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+29,1,インスリン グルリジン,インスリン製剤（超速効型）,アピドラ注,先発品,サノフィ,ペン型カートリッジ,カート,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+30,1,インスリン グルリジン,インスリン製剤（超速効型）,アピドラ注,先発品,サノフィ,バイアル,,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+31,1,インスリン アスパルト,インスリン製剤（超速効型）,インスリンアスパルトBS注,ジェネリック,サノフィ等,プレフィルドペン,ソロスターNR等,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+32,1,インスリン アスパルト,インスリン製剤（超速効型）,インスリンアスパルトBS注,ジェネリック,サノフィ等,ペン型カートリッジ,カートNR等,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+33,1,インスリン アスパルト,インスリン製剤（超速効型）,インスリンアスパルトBS注,ジェネリック,サノフィ等,バイアル,,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+34,1,インスリン リスプロ,インスリン製剤（超速効型）,インスリンリスプロBS注,ジェネリック,サノフィ等,プレフィルドペン,ソロスターHU等,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+35,1,インスリン リスプロ,インスリン製剤（超速効型）,インスリンリスプロBS注,ジェネリック,サノフィ等,ペン型カートリッジ,カートHU等,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+36,1,インスリン リスプロ,インスリン製剤（超速効型）,インスリンリスプロBS注,ジェネリック,サノフィ等,バイアル,,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+37,1,インスリン ヒト,インスリン製剤（速効型）,ノボリンR注,先発品,ノボ ノルディスク,プレフィルドペン,フレックスペン,100単位/mL,皮下注/静注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+38,1,インスリン ヒト,インスリン製剤（速効型）,ヒューマリンR注,先発品,日本イーライリリー,プレフィルドペン,ミリオペン,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+39,1,インスリン ヒト,インスリン製剤（速効型）,ヒューマリンR注,先発品,日本イーライリリー,ペン型カートリッジ,カート,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+40,1,インスリン ヒト,インスリン製剤（速効型）,ヒューマリンR注,先発品,日本イーライリリー,バイアル,,100単位/mL,皮下注/静注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+41,1,インスリン ヒト,インスリン製剤（中間型）,ノボリンN注,先発品,ノボ ノルディスク,プレフィルドペン,フレックスペン,100単位/mL,皮下注,毎日,2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+42,1,インスリン ヒト,インスリン製剤（中間型）,ヒューマリンN注,先発品,日本イーライリリー,プレフィルドペン,ミリオペン,100単位/mL,皮下注,毎日,2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+43,1,インスリン ヒト,インスリン製剤（中間型）,ヒューマリンN注,先発品,日本イーライリリー,ペン型カートリッジ,カート,100単位/mL,皮下注,毎日,2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+44,1,インスリン ヒト,インスリン製剤（中間型）,ヒューマリンN注,先発品,日本イーライリリー,バイアル,,100単位/mL,皮下注,毎日,2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+45,1,インスリン アスパルト,インスリン製剤（混合型）,ノボラピッド注30ミックス,先発品,ノボ ノルディスク,プレフィルドペン,フレックスペン,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+46,1,インスリン アスパルト,インスリン製剤（混合型）,ノボラピッド注30ミックス,先発品,ノボ ノルディスク,ペン型カートリッジ,ペンフィル,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+47,1,インスリン アスパルト,インスリン製剤（混合型）,ノボラピッド注50ミックス,先発品,ノボ ノルディスク,プレフィルドペン,フレックスペン,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+48,1,インスリン リスプロ,インスリン製剤（混合型）,ヒューマログミックス25注,先発品,日本イーライリリー,プレフィルドペン,ミリオペン,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+49,1,インスリン リスプロ,インスリン製剤（混合型）,ヒューマログミックス25注,先発品,日本イーライリリー,ペン型カートリッジ,カート,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+50,1,インスリン リスプロ,インスリン製剤（混合型）,ヒューマログミックス50注,先発品,日本イーライリリー,プレフィルドペン,ミリオペン,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+51,1,インスリン リスプロ,インスリン製剤（混合型）,ヒューマログミックス50注,先発品,日本イーライリリー,ペン型カートリッジ,カート,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+52,1,インスリン ヒト,インスリン製剤（混合型）,ノボリン30R注,先発品,ノボ ノルディスク,プレフィルドペン,フレックスペン,100単位/mL,皮下注,毎日,2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+53,1,インスリン ヒト,インスリン製剤（混合型）,ヒューマリン3/7注,先発品,日本イーライリリー,プレフィルドペン,ミリオペン,100単位/mL,皮下注,毎日,2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+54,1,インスリン ヒト,インスリン製剤（混合型）,ヒューマリン3/7注,先発品,日本イーライリリー,ペン型カートリッジ,カート,100単位/mL,皮下注,毎日,2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+55,1,インスリン ヒト,インスリン製剤（混合型）,ヒューマリン3/7注,先発品,日本イーライリリー,バイアル,,100単位/mL,皮下注,毎日,2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+56,1,インスリン デグルデク,インスリン製剤（持効型溶解）,トレシーバ注,先発品,ノボ ノルディスク,プレフィルドペン,フレックスタッチ,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+57,1,インスリン デグルデク,インスリン製剤（持効型溶解）,トレシーバ注,先発品,ノボ ノルディスク,ペン型カートリッジ,ペンフィル,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+58,1,インスリン グラルギン,インスリン製剤（持効型溶解）,ランタス注,先発品,サノフィ,プレフィルドペン,ソロスター,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+59,1,インスリン グラルギン,インスリン製剤（持効型溶解）,ランタス注,先発品,サノフィ,ペン型カートリッジ,カート,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+60,1,インスリン グラルギン,インスリン製剤（持効型溶解）,ランタス注,先発品,サノフィ,バイアル,,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+61,1,インスリン グラルギン,インスリン製剤（持効型溶解）,ランタスXR注,先発品,サノフィ,プレフィルドペン,ソロスター,300単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+62,1,インスリン デテミル,インスリン製剤（持効型溶解）,レベミル注,先発品,ノボ ノルディスク,プレフィルドペン,フレックスペン,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+63,1,インスリン デテミル,インスリン製剤（持効型溶解）,レベミル注,先発品,ノボ ノルディスク,ペン型カートリッジ,ペンフィル,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+64,1,インスリン イコデク,インスリン製剤（週1回型）,アウィクリ注,先発品,ノボ ノルディスク,プレフィルドペン,フレックスタッチ,700単位/mL,皮下注,週1回,2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+65,1,インスリン グラルギン,インスリン製剤（持効型溶解）,インスリングラルギンBS注,ジェネリック,日本イーライリリー,プレフィルドペン,ミリオペン「リリー」,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+66,1,インスリン グラルギン,インスリン製剤（持効型溶解）,インスリングラルギンBS注,ジェネリック,日本イーライリリー,ペン型カートリッジ,カート「リリー」,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+67,1,インスリン グラルギン,インスリン製剤（持効型溶解）,インスリングラルギンBS注,ジェネリック,富士フイルム富山化学,プレフィルドペン,キット「FFP」,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+68,1,インスリン デグルデク・アスパルト,インスリン製剤（配合溶解）,ライゾデグ配合注,先発品,ノボ ノルディスク,プレフィルドペン,フレックスタッチ,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,必要,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+69,1,,インスリン製剤（超速効型）,フィアスプ注,,ノボ ノルディスク,ペン型カートリッジ,ペンフィル 3mL,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+70,1,,インスリン製剤（超速効型）,ノボラピッド注,,ノボ ノルディスク,ペン型カートリッジ,ペンフィル 3mL,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+71,1,,インスリン製剤（超速効型）,ノボラピッド注30ミックス,,ノボ ノルディスク,ペン型カートリッジ,ペンフィル 3mL,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+72,1,,インスリン製剤（超速効型）,ルムジェブ注,,日本イーライリリー,ペン型カートリッジ,カート 3mL,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+73,1,,インスリン製剤（超速効型）,ヒューマログ注,,日本イーライリリー,ペン型カートリッジ,カート 3mL,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+74,1,,インスリン製剤（超速効型）,ヒューマログミックス25注,,日本イーライリリー,ペン型カートリッジ,カート 3mL,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+75,1,,インスリン製剤（超速効型）,ヒューマログミックス50注,,日本イーライリリー,ペン型カートリッジ,カート 3mL,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+76,1,,インスリン製剤（超速効型）,アピドラ注,,サノフィ,ペン型カートリッジ,カート 3mL,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+77,1,,インスリン製剤（超速効型）,インスリンリスプロBS注,,各社BS,プレフィルドペン,,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+78,1,,インスリン製剤（超速効型）,インスリンリスプロBS注,,各社BS,ペン型カートリッジ,,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+79,1,,インスリン製剤（超速効型）,インスリンアスパルトBS注,,各社BS,プレフィルドペン,,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+80,1,,インスリン製剤（超速効型）,インスリンアスパルトBS注,,各社BS,ペン型カートリッジ,,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+81,1,,インスリン製剤（速効型）,ヒューマリンR注,,日本イーライリリー,ペン型カートリッジ,カート 3mL,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+82,1,,インスリン製剤（中間型）,ヒューマリンN注,,日本イーライリリー,ペン型カートリッジ,カート 3mL,100単位/mL,皮下注,毎日,2型糖尿病,可,,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+83,1,,インスリン製剤（混合型）,ヒューマリン3/7注,,日本イーライリリー,ペン型カートリッジ,カート 3mL,100単位/mL,皮下注,毎日,2型糖尿病,可,,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+84,1,,インスリン製剤（持効型溶解）,トレシーバ注,,ノボ ノルディスク,ペン型カートリッジ,ペンフィル 3mL,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+85,1,,インスリン製剤（持効型溶解）,レベミル注,,ノボ ノルディスク,ペン型カートリッジ,ペンフィル 3mL,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+86,1,,インスリン製剤（持効型溶解）,インスリングラルギンBS注キット「FFP」,,富士フイルム富山化学,プレフィルドペン,ソロスターHU,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+87,1,,インスリン製剤（持効型溶解）,インスリングラルギンBS注キット「リリー」,,日本イーライリリー,プレフィルドペン,ミリオペン,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+88,1,,インスリン製剤（持効型溶解）,インスリングラルギンBS注キット「ニプロ」,,ニプロ,プレフィルドペン,ペン300,100単位/mL,皮下注,毎日,1型・2型糖尿病,可,,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636,2026-04
+89,15,,グルカゴン様ペプチド-1受容体アゴニスト,ビクトーザ皮下注18mg,,ノボ ノルディスク,ペン型,ビクトーザペン,18mg/3mL,皮下注,毎日,2型糖尿病,可,,https://kanri.nkdesk.com/drags/glp.php,2026-04
+90,15,,グルカゴン様ペプチド-1受容体アゴニスト,バイエッタ皮下注,,アストラゼネカ,ペン型,,5μg/10μg,皮下注,毎日,2型糖尿病,可,,https://kanri.nkdesk.com/drags/glp.php,2026-04
+91,15,,グルカゴン様ペプチド-1受容体アゴニスト,ビデュリオン皮下注,,アストラゼネカ,ペン型,,2mg,皮下注,週1回,2型糖尿病,可,,https://kanri.nkdesk.com/drags/glp.php,2026-04
+92,15,,グルカゴン様ペプチド-1受容体アゴニスト,リキスミア皮下注,,サノフィ,ペン型,,10μg/20μg,皮下注,毎日,2型糖尿病,可,,https://kanri.nkdesk.com/drags/glp.php,2026-04
+93,15,,グルカゴン様ペプチド-1受容体アゴニスト,トルリシティ皮下注0.75mgアテオス,,日本イーライリリー,アテオス（一体型使い捨て）,アテオス,0.75mg,皮下注,週1回,2型糖尿病,可,,https://kanri.nkdesk.com/drags/glp.php,2026-04
+94,15,,グルカゴン様ペプチド-1受容体アゴニスト,トルリシティ皮下注1.5mgアテオス,,日本イーライリリー,アテオス（一体型使い捨て）,アテオス,1.5mg,皮下注,週1回,2型糖尿病,可,,https://kanri.nkdesk.com/drags/glp.php,2026-04
+95,15,,グルカゴン様ペプチド-1受容体アゴニスト,オゼンピック皮下注2mg,,ノボ ノルディスク,ペン型,オゼンピックペン,0.25mg/0.5mg/1mg/2mg,皮下注,週1回,2型糖尿病,可,,https://kanri.nkdesk.com/drags/glp.php,2026-04
+96,15,,グルカゴン様ペプチド-1受容体アゴニスト,ウゴービ皮下注（各用量）SD型,,ノボ ノルディスク,SD型（1回使い捨てシリンジ）,ウゴービSD,0.25〜2.4mg,皮下注,週1回,肥満症,可,,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01493,2026-04
+97,15,,グルカゴン様ペプチド-1受容体アゴニスト,ウゴービ皮下注（各用量）ペン型,,ノボ ノルディスク,ペン型（多回使用）,ウゴービペン,0.25〜2.4mg,皮下注,週1回,肥満症,可,,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01493,2026-04
+98,63,,チルゼパチド製剤,マンジャロ皮下注（各用量）アテオス,,日本イーライリリー,アテオス（一体型使い捨て）,アテオス,2.5〜15mg,皮下注,週1回,2型糖尿病,可,,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01493,2026-04
+99,63,,チルゼパチド製剤,ゼップバウンド皮下注（各用量）アテオス,,日本イーライリリー,アテオス（一体型使い捨て）,アテオス,2.5〜15mg,皮下注,週1回,肥満症,可,,https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01493,2026-04
+100,19,,エタネルセプト製剤,エンブレル皮下注,,ファイザー,プレフィルドシリンジ,,10mg/25mg/50mg,皮下注,週1〜2回,関節リウマチ・乾癬等,可,,https://yukawa-clinic.jp/knowledge/biologicalpreparation/feature.html,2026-04
+101,19,,エタネルセプト製剤,エンブレル皮下注,,ファイザー,プレフィルドペン,,10mg/25mg/50mg,皮下注,週1〜2回,関節リウマチ・乾癬等,可,,https://yukawa-clinic.jp/knowledge/biologicalpreparation/feature.html,2026-04
+102,19,,エタネルセプト製剤,エタネルセプトBS皮下注,,各社BS,プレフィルドシリンジ,,10mg/25mg/50mg,皮下注,週1〜2回,関節リウマチ,可,,https://yukawa-clinic.jp/knowledge/biologicalpreparation/feature.html,2026-04
+103,19,,エタネルセプト製剤,エタネルセプトBS皮下注,,各社BS,プレフィルドペン,,10mg/25mg/50mg,皮下注,週1〜2回,関節リウマチ,可,,https://yukawa-clinic.jp/knowledge/biologicalpreparation/feature.html,2026-04
+104,23,,アダリムマブ製剤,ヒュミラ皮下注シリンジ,,アッヴィ,プレフィルドシリンジ,,40mg/0.8mL,皮下注,2週毎,関節リウマチ・乾癬・クローン病等,可,,https://yukawa-clinic.jp/knowledge/biologicalpreparation/feature.html,2026-04
+105,23,,アダリムマブ製剤,ヒュミラ皮下注ペン,,アッヴィ,プレフィルドペン（オートインジェクター）,,40mg/0.4mL,皮下注,2週毎,関節リウマチ・乾癬・クローン病等,可,,https://yukawa-clinic.jp/knowledge/biologicalpreparation/feature.html,2026-04
+106,23,,アダリムマブ製剤,アダリムマブBS皮下注,,各社BS,プレフィルドシリンジ,,40mg,皮下注,2週毎,関節リウマチ,可,,https://yukawa-clinic.jp/knowledge/biologicalpreparation/feature.html,2026-04
+107,23,,アダリムマブ製剤,アダリムマブBS皮下注,,各社BS,プレフィルドペン,,40mg,皮下注,2週毎,関節リウマチ,可,,https://yukawa-clinic.jp/knowledge/biologicalpreparation/feature.html,2026-04
+108,28,,セルトリズマブペゴル製剤,シムジア皮下注シリンジ,,UCBジャパン,プレフィルドシリンジ,,200mg/mL,皮下注,2〜4週毎,関節リウマチ・乾癬等,可,,https://yukawa-clinic.jp/knowledge/biologicalpreparation/feature.html,2026-04
+109,28,,セルトリズマブペゴル製剤,シムジア皮下注オートクリックス,,UCBジャパン,オートインジェクター,オートクリックス,200mg/mL,皮下注,2〜4週毎,関節リウマチ・乾癬等,可,,https://yukawa-clinic.jp/knowledge/biologicalpreparation/feature.html,2026-04
+110,29,,トシリズマブ製剤,アクテムラ皮下注シリンジ,,中外製薬,プレフィルドシリンジ,,162mg/0.9mL,皮下注,2週毎,関節リウマチ,可,,https://yukawa-clinic.jp/knowledge/biologicalpreparation/feature.html,2026-04
+111,29,,トシリズマブ製剤,アクテムラ皮下注オートインジェクター,,中外製薬,オートインジェクター,,162mg/0.9mL,皮下注,2週毎,関節リウマチ,可,,https://yukawa-clinic.jp/knowledge/biologicalpreparation/feature.html,2026-04
+112,31,,アバタセプト製剤,オレンシア皮下注シリンジ,,ブリストル・マイヤーズ スクイブ,プレフィルドシリンジ,,125mg/mL,皮下注,週1回,関節リウマチ,可,,https://yukawa-clinic.jp/knowledge/biologicalpreparation/feature.html,2026-04
+113,31,,アバタセプト製剤,オレンシア皮下注オートインジェクター,,ブリストル・マイヤーズ スクイブ,オートインジェクター,,125mg/mL,皮下注,週1回,関節リウマチ,可,,https://yukawa-clinic.jp/knowledge/biologicalpreparation/feature.html,2026-04
+114,41,,ゴリムマブ製剤,シンポニー皮下注シリンジ,,ヤンセン,プレフィルドシリンジ,,50mg/0.5mL,皮下注,4週毎,関節リウマチ・潰瘍性大腸炎,可（条件付き）,,https://yukawa-clinic.jp/knowledge/biologicalpreparation/feature.html,2026-04
+115,41,,ゴリムマブ製剤,シンポニー皮下注オートインジェクター,,ヤンセン,オートインジェクター,スマートジェクト,50mg/0.5mL,皮下注,4週毎,関節リウマチ・潰瘍性大腸炎,可（条件付き）,,https://yukawa-clinic.jp/knowledge/biologicalpreparation/feature.html,2026-04
+116,44,,サリルマブ製剤,ケブザラ皮下注シリンジ,,サノフィ,プレフィルドシリンジ,,150mg/200mg,皮下注,2週毎,関節リウマチ,可,,https://yukawa-clinic.jp/knowledge/biologicalpreparation/feature.html,2026-04
+117,44,,サリルマブ製剤,ケブザラ皮下注ペン,,サノフィ,プレフィルドペン,,150mg/200mg,皮下注,2週毎,関節リウマチ,可,,https://yukawa-clinic.jp/knowledge/biologicalpreparation/feature.html,2026-04
+118,73,,オゾラリズマブ製剤,ナノゾラ皮下注,,大正製薬,プレフィルドシリンジ,,30mg/0.6mL,皮下注,4週毎,関節リウマチ,可,,https://www.taisho.co.jp/company/news/2023/20231201001463.html,2026-04
+119,35,,セクキヌマブ製剤,コセンティクス皮下注シリンジ,,ノバルティス,プレフィルドシリンジ,,150mg/300mg,皮下注,4週毎,乾癬・強直性脊椎炎,可,,https://med.skk-net.com/diagnostics/smbg-c101.html,2026-04
+120,35,,セクキヌマブ製剤,コセンティクス皮下注ペン,,ノバルティス,プレフィルドペン,センソレディペン,150mg/300mg,皮下注,4週毎,乾癬・強直性脊椎炎,可,,https://med.skk-net.com/diagnostics/smbg-c101.html,2026-04
+121,37,,ブロダルマブ製剤,ルミセフ皮下注シリンジ,,アストラゼネカ,プレフィルドシリンジ,,210mg/1.5mL,皮下注,2週毎,乾癬,可,,https://med.skk-net.com/diagnostics/smbg-c101.html,2026-04
+122,40,,イキセキズマブ製剤,トルツ皮下注シリンジ,,日本イーライリリー,プレフィルドシリンジ,,80mg/mL,皮下注,2〜4週毎,乾癬・関節症性乾癬,可,,https://med.skk-net.com/diagnostics/smbg-c101.html,2026-04
+123,40,,イキセキズマブ製剤,トルツ皮下注オートインジェクター,,日本イーライリリー,オートインジェクター,,80mg/mL,皮下注,2〜4週毎,乾癬・関節症性乾癬,可,,https://med.skk-net.com/diagnostics/smbg-c101.html,2026-04
+124,45,,デュピルマブ製剤,デュピクセント皮下注シリンジ,,サノフィ,プレフィルドシリンジ,,300mg/2mL,皮下注,2週毎,アトピー性皮膚炎・喘息,可,,https://www.support-allergy.com/selfinjection/injection,2026-04
+125,45,,デュピルマブ製剤,デュピクセント皮下注ペン,,サノフィ,プレフィルドペン,,300mg/2mL,皮下注,2週毎,アトピー性皮膚炎・喘息,可,,https://www.support-allergy.com/selfinjection/injection,2026-04
+126,72,,テゼペルマブ製剤,テゼスパイア皮下注シリンジ,,アストラゼネカ,プレフィルドシリンジ,,210mg/1.86mL,皮下注,4週毎,気管支喘息,可,,https://med.skk-net.com/diagnostics/smbg-c101.html,2026-04
+127,72,,テゼペルマブ製剤,テゼスパイア皮下注ペン,,アストラゼネカ,プレフィルドペン,,210mg/1.86mL,皮下注,4週毎,気管支喘息,可,,https://med.skk-net.com/diagnostics/smbg-c101.html,2026-04
+128,74,,トラロキヌマブ製剤,アドトラーザ皮下注シリンジ,,LEO Pharma,プレフィルドシリンジ,,150mg/mL,皮下注,2〜4週毎,アトピー性皮膚炎,可,,https://www.leo-pharma.jp/media-center/news/2024-04-01,2026-04
+129,68,,ネモリズマブ製剤,ミチーガ皮下注シリンジ,,マルホ,プレフィルドシリンジ,,60mg/mL,皮下注,4週毎,アトピー性皮膚炎,可,,https://med.skk-net.com/diagnostics/smbg-c101.html,2026-04
+130,64,,ビメキズマブ製剤,ビンゼレックス皮下注シリンジ,,UCBジャパン,プレフィルドシリンジ,,160mg/mL,皮下注,4〜8週毎,乾癬,可,,https://med.skk-net.com/diagnostics/smbg-c101.html,2026-04
+131,64,,ビメキズマブ製剤,ビンゼレックス皮下注ペン,,UCBジャパン,プレフィルドペン,,160mg/mL,皮下注,4〜8週毎,乾癬,可,,https://med.skk-net.com/diagnostics/smbg-c101.html,2026-04
+132,77,,ミリキズマブ製剤,オンボー皮下注シリンジ,,日本イーライリリー,プレフィルドシリンジ,,125mg/mL,皮下注,4〜8週毎,乾癬・潰瘍性大腸炎,可,,https://med.skk-net.com/diagnostics/smbg-c101.html,2026-04
+133,77,,ミリキズマブ製剤,オンボー皮下注ペン,,日本イーライリリー,プレフィルドペン,,125mg/mL,皮下注,4〜8週毎,乾癬・潰瘍性大腸炎,可,,https://med.skk-net.com/diagnostics/smbg-c101.html,2026-04
+134,24,,テリパラチド製剤,フォルテオ皮下注キット,,日本イーライリリー,プレフィルドペン,フォルテオペン,600μg/2.4mL,皮下注,毎日,骨粗鬆症,可,,https://med.skk-net.com/diagnostics/smbg-c101.html,2026-04
+135,24,,テリパラチド製剤,テリボン皮下注オートインジェクター28.2μg,,旭化成ファーマ,オートインジェクター,,28.2μg,皮下注,週2回,骨粗鬆症,可,,https://akp-pharma-digital.com/products/list/155,2026-04
+136,58,,アバロパラチド酢酸塩製剤,オスタバロ皮下注カートリッジ1.5mg,,帝人ファーマ,ペン型（カートリッジ）,オスタバロペン,1.5mg,皮下注,毎日,骨粗鬆症,可,,https://med.skk-net.com/diagnostics/smbg-c101.html,2026-04
+137,25,,アドレナリン製剤,エピペン注射液0.15mg,,マイラン EPD,オートインジェクター,エピペン,0.15mg,筋注,緊急時,アナフィラキシー,可,,https://med.skk-net.com/diagnostics/smbg-c101.html,2026-04
+138,25,,アドレナリン製剤,エピペン注射液0.3mg,,マイラン EPD,オートインジェクター,エピペン,0.3mg,筋注,緊急時,アナフィラキシー,可,,https://med.skk-net.com/diagnostics/smbg-c101.html,2026-04
+139,36,,エボロクマブ製剤,レパーサ皮下注シリンジ,,アムジェン,プレフィルドシリンジ,,140mg/mL,皮下注,2〜4週毎,脂質異常症・家族性高コレステロール血症,可,,https://med.skk-net.com/diagnostics/smbg-c101.html,2026-04
+140,36,,エボロクマブ製剤,レパーサ皮下注ペン,,アムジェン,プレフィルドペン,ピュッシュクリックペン,140mg/mL,皮下注,2〜4週毎,脂質異常症・家族性高コレステロール血症,可,,https://med.skk-net.com/diagnostics/smbg-c101.html,2026-04
+141,38,,アリロクマブ製剤,プラルエント皮下注ペン,,サノフィ,プレフィルドペン,,75mg/150mg,皮下注,2〜4週毎,脂質異常症・家族性高コレステロール血症,可,,https://med.skk-net.com/diagnostics/smbg-c101.html,2026-04
+142,50,,メポリズマブ製剤,ヌーカラ皮下注シリンジ,,グラクソ・スミスクライン,プレフィルドシリンジ,,100mg/mL,皮下注,4週毎,気管支喘息・EGPA・鼻茸,可,,https://med.skk-net.com/diagnostics/smbg-c101.html,2026-04
+143,50,,メポリズマブ製剤,ヌーカラ皮下注ペン,,グラクソ・スミスクライン,プレフィルドペン,,100mg/mL,皮下注,4週毎,気管支喘息・EGPA・鼻茸,可,,https://med.skk-net.com/diagnostics/smbg-c101.html,2026-04
+144,51,,オマリズマブ製剤,ゾレア皮下注シリンジ,,ノバルティス,プレフィルドシリンジ,,75mg/150mg,皮下注,2〜4週毎,気管支喘息・蕁麻疹,可,,https://med.skk-net.com/diagnostics/smbg-c101.html,2026-04
+145,62,,メトトレキサート製剤,メトジェクト皮下注シリンジ,,ファイザー,プレフィルドシリンジ,,7.5〜25mg,皮下注,週1回,関節リウマチ,可,,https://med.skk-net.com/diagnostics/smbg-c101.html,2026-04
+146,62,,メトトレキサート製剤,メトジェクト皮下注ペン,,ファイザー,プレフィルドペン,,7.5〜25mg,皮下注,週1回,関節リウマチ,可,,https://med.skk-net.com/diagnostics/smbg-c101.html,2026-04
+147,42,,エミシズマブ製剤,ヘムライブラ皮下注シリンジ,,中外製薬,プレフィルドシリンジ,,30mg/60mg/105mg/150mg,皮下注,週1〜4週毎,血友病A（インヒビター保有・非保有）,可,,https://med.skk-net.com/diagnostics/smbg-c101.html,2026-04
+148,80,,マルスタシマブ（遺伝子組換え）,ヒムペブジ皮下注150mgペン,,ファイザー,プレフィルドペン,,150mg,皮下注,15日毎,先天性血友病（インヒビター非保有）,可,,data/001440805.pdf,2026-04
+149,81,,ロザノリキシズマブ（遺伝子組換え）,リスティーゴ皮下注280mg,,ユーシービー,プレフィルドシリンジ,,280mg,皮下注,15日毎（体重別）,全身型重症筋無力症,可,,data/001440805.pdf,2026-04
+150,82,,ベンラリズマブ（遺伝子組換え）,ファセンラ皮下注30mgシリンジ,,アストラゼネカ,プレフィルドシリンジ,,30mg/mL,皮下注,4週毎,気管支喘息・EGPA,可,,data/001440805.pdf,2026-04
+151,82,,ベンラリズマブ（遺伝子組換え）,ファセンラ皮下注30mgペン,,アストラゼネカ,プレフィルドペン,,30mg/mL,皮下注,4週毎,気管支喘息・EGPA,可,,data/001440805.pdf,2026-04
