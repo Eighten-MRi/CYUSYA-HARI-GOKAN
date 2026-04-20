@@ -1,4 +1,4 @@
-category,category_id,device_maker,device_model,device_spec,device_connection,needle_maker,needle_model,needle_gauge,needle_length,needle_connection,compatibility,notes,source,last_verified
+﻿﻿category,category_id,device_maker,device_model,device_spec,device_connection,needle_maker,needle_model,needle_gauge,needle_length,needle_connection,compatibility,notes,source,last_verified
 注射器,,テルモ,テルモシリンジ SS-01T,1mL,ルアースリップ,テルモ,テルモ注射針 NN-2713S,27G,13mm,ルアースリップ,確認済,,初期データ,2026-04
 注射器,,テルモ,テルモシリンジ SS-01T,1mL,ルアースリップ,テルモ,テルモ注射針 NN-2516S,25G,16mm,ルアースリップ,確認済,若干滲漏あり,初期データ,2026-04
 注射器,,テルモ,テルモシリンジ SS-01T,1mL,ルアースリップ,テルモ,テルモ注射針 NN-2332S,23G,32mm,ルアースリップ,規格適合,,初期データ,2026-04
