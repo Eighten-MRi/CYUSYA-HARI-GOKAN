@@ -239,7 +239,7 @@
         var drugText = toKatakana(
           (drug.brand_name || "") + " " + (drug.generic_name || "")
         ).toLowerCase();
-        if (drugText.indexOf(normalizedQuery) !== -1 && drug.device_name && drug.device_name.trim() !== "") {
+        if (drugText.indexOf(normalizedQuery) !== -1) {
           matches.push({
             maker: drug.maker || "",
             model: drug.brand_name || "",
@@ -344,8 +344,14 @@
         var devName = selected.deviceName;
 
         if (!devName || devName.trim() === "") {
-          // デバイス名なし（バイアル等）
-          statusMessage.textContent = "バイアル製剤です。通常の注射器と針を組み合わせて使用してください";
+          var dType = (selected.deviceType || "").toLowerCase();
+          if (dType.indexOf("バイアル") !== -1) {
+            statusMessage.textContent = "バイアル製剤です。通常の注射器と針を組み合わせて使用してください";
+          } else if (dType.indexOf("プレフィルドシリンジ") !== -1 || dType.indexOf("プレフィルドペン") !== -1 || dType.indexOf("オートインジェクター") !== -1) {
+            statusMessage.textContent = "プレフィルド一体型製剤です。針は交換できません";
+          } else {
+            statusMessage.textContent = "バイアル製剤です。通常の注射器と針を組み合わせて使用してください";
+          }
           statusMessage.className = "status-message";
           return;
         }
@@ -393,7 +399,11 @@
       }
 
       if (results.length === 0) {
-        statusMessage.textContent = "該当する針が見つかりませんでした";
+        if (selected.isDrug && devName && devName.trim() !== "") {
+          statusMessage.textContent = selected.model + "（" + devName + "）の針互換性データは整備中です";
+        } else {
+          statusMessage.textContent = "該当する針が見つかりませんでした";
+        }
         statusMessage.className = "status-message";
         return;
       }
