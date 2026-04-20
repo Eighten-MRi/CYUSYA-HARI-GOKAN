@@ -141,6 +141,27 @@
 | 81 | ロザノリキシズマブ（遺伝子組換え） | リスティーゴ皮下注280mg | 全身型重症筋無力症 | 令和5年9月 薬事承認 |
 | 82 | ベンラリズマブ（遺伝子組換え） | ファセンラ皮下注30mgシリンジ/ペン | 気管支喘息・EGPA（4週以内投与間隔のみ） | 平成30年1月/令和6年12月 薬事承認 |
 
+## 派生データ
+
+### `insulin_glp1_medications.csv` — インスリン・GLP-1系 詳細版
+
+`c101_medications.csv` のうち category_id=1（インスリン製剤）・15（GLP-1受容体アゴニスト）・46（インスリン・GLP-1配合剤）・63（チルゼパチド製剤）の 4 カテゴリに限定し、以下の情報を追加した詳細版データ（68 行）:
+
+- `active_ingredient`: 一般名（有効成分）
+- `product_type`: 先発品 / ジェネリック
+- `needle_exchange_required`: 必要 / 不要（一体型使い捨て＝不要、再利用型ペン＋バイアル＝必要）
+- バイアル製剤（フィアスプ/ノボラピッド/ルムジェブ/ヒューマログ/アピドラ等）およびミリオペンHD（200単位/mL）、ヒューマログミックス50 カート等を網羅
+
+デバイス種別の語彙は `プレフィルドペン` / `ペン型カートリッジ` / `バイアル` / `一体型使い捨て` の 4 種類に統一。用量違い（ウゴービ/マンジャロ等）は 1 行に集約（`dose` 列に範囲表記）。
+
+**主な参照元:**
+- KEGG医薬品データベース（インスリン）: https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01636
+- KEGG医薬品データベース（GLP-1/GIP）: https://www.kegg.jp/medicus-bin/similar_product?kegg_drug=DG01493
+- 管理薬剤師.com GLP-1: https://kanri.nkdesk.com/drags/glp.php
+- 管理薬剤師.com インスリン配合剤: https://kanri.nkdesk.com/chouzai/chouzai5.php
+
+`app.js` は現状このファイルを参照しない（`c101_medications.csv` のみ読み込み）。詳細版への切替は別途検討。
+
 ## データの注意事項
 
 - 別表第九は診療報酬改定（通常2年ごと）および随時の告示改正で更新される
